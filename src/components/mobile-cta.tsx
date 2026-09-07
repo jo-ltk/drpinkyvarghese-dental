@@ -1,11 +1,12 @@
 "use client";
 
-import { ArrowUpRight, MessageCircle, Sparkles } from "lucide-react";
+import { CalendarDays, MapPin, MessageCircle } from "lucide-react";
 import { useEffect, useState } from "react";
 import { clinic } from "@/content/clinic";
 
 export function MobileCta() {
   const [hidden, setHidden] = useState(false);
+  const [showLocations, setShowLocations] = useState(false);
 
   useEffect(() => {
     const visit = document.getElementById("visit");
@@ -22,29 +23,59 @@ export function MobileCta() {
     return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    const onScroll = () => {
+      setShowLocations(window.scrollY > window.innerHeight * 0.55);
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   if (hidden) return null;
 
   return (
-    <div className="fixed inset-x-0 bottom-0 z-40 px-4 pb-[max(1rem,env(safe-area-inset-bottom))] pointer-events-none md:hidden">
-      <div className="pointer-events-auto mx-auto flex max-w-sm items-center justify-between gap-3 rounded-full bg-[#1a0f2e]/92 p-2 text-white shadow-[0_16px_40px_rgba(10,5,20,0.55)] backdrop-blur-lg border border-[var(--color-gold)]/25">
-        <a
-          href={clinic.whatsappHref}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex size-11 items-center justify-center rounded-full bg-[#25D366]/20 text-[#25D366] transition-transform active:scale-95"
-          aria-label="Direct WhatsApp Concierge"
+    <div className="pointer-events-none fixed inset-x-0 bottom-0 z-40 px-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] md:hidden">
+      <div className="pointer-events-auto mx-auto flex max-w-md flex-col gap-2">
+        {/* Consulting locations bar — appears after hero */}
+        <div
+          className={`overflow-hidden transition-all duration-500 ${
+            showLocations
+              ? "max-h-16 opacity-100 translate-y-0"
+              : "max-h-0 opacity-0 translate-y-3"
+          }`}
         >
-          <MessageCircle className="size-5" />
-        </a>
+          <div className="flex items-center gap-2 rounded-full border border-[var(--color-gold)]/25 bg-[#1a0f2e]/92 px-3.5 py-2.5 text-[#f7f3eb] shadow-[0_12px_32px_rgba(10,5,20,0.45)] backdrop-blur-lg">
+            <MapPin
+              className="size-3.5 shrink-0 text-[var(--color-gold)]"
+              strokeWidth={1.75}
+            />
+            <p className="min-w-0 truncate font-mono text-[0.52rem] tracking-[0.14em] text-[#f7f3eb]/85 uppercase">
+              <span className="text-[var(--color-gold)]">Consulting at</span>{" "}
+              {clinic.consultingAt.join(" · ")}
+            </p>
+          </div>
+        </div>
 
-        <a
-          href="#visit"
-          className="flex flex-1 min-h-11 items-center justify-center gap-2 rounded-full bg-[var(--color-gold)] px-5 py-3 font-mono text-[0.6875rem] uppercase tracking-widest font-semibold text-[#1a0f2e] shadow-md transition-transform active:scale-95"
-        >
-          <Sparkles className="size-3.5" />
-          <span>Reserve Consultation</span>
-          <ArrowUpRight className="size-3.5" />
-        </a>
+        <div className="flex items-center justify-between gap-2 rounded-full border border-[var(--color-gold)]/25 bg-[#1a0f2e]/92 p-1.5 text-white shadow-[0_16px_40px_rgba(10,5,20,0.55)] backdrop-blur-lg">
+          <a
+            href={clinic.whatsappHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex size-11 items-center justify-center rounded-full bg-[#25D366]/20 text-[#25D366] transition-transform active:scale-95"
+            aria-label="Direct WhatsApp Concierge"
+          >
+            <MessageCircle className="size-5" />
+          </a>
+
+          <a
+            href="#visit"
+            className="cta-gold flex min-h-11 flex-1 items-center justify-center gap-2 rounded-full px-4 py-3 font-sans text-[0.72rem] font-semibold tracking-[0.04em] transition-[filter,transform] active:scale-95"
+          >
+            <CalendarDays className="size-3.5" strokeWidth={1.75} />
+            <span>Book Appointment</span>
+          </a>
+        </div>
       </div>
     </div>
   );

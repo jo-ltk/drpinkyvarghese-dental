@@ -1,20 +1,20 @@
 "use client";
 
 import { useRef, type ReactNode } from "react";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, CalendarDays, Play } from "lucide-react";
 import {
   gsap,
   useGSAP,
   EASE_GSAP,
   prefersReducedMotion,
-  isFinePointer,
 } from "@/lib/motion";
 import {
   clinic,
-  HERO_ENVIRONMENT,
   HERO_FIGURES,
   HERO_FIGURES_MOBILE,
+  SERVICE_PILLARS,
 } from "@/content/clinic";
+import { SectionWave } from "@/components/section-wave";
 import { cn } from "@/lib/utils";
 
 function MaskLine({
@@ -25,7 +25,7 @@ function MaskLine({
   className?: string;
 }) {
   return (
-    <span className={cn("block overflow-hidden pb-[0.04em]", className)}>
+    <span className={cn("block overflow-hidden pb-[0.05em]", className)}>
       <span data-hero-line className="block will-change-transform">
         {children}
       </span>
@@ -33,13 +33,35 @@ function MaskLine({
   );
 }
 
-/** Elegant champagne ornamental arcs — drawn on entrance */
-function GoldOrnament({ className }: { className?: string }) {
+function ToothWatermark({ className }: { className?: string }) {
+  return (
+    <svg
+      data-hero-tooth
+      aria-hidden
+      viewBox="0 0 200 260"
+      className={cn("pointer-events-none text-white", className)}
+    >
+      <defs>
+        <radialGradient id="toothGlow" cx="50%" cy="40%" r="60%">
+          <stop offset="0%" stopColor="rgba(180,140,220,0.55)" />
+          <stop offset="70%" stopColor="rgba(90,50,140,0.2)" />
+          <stop offset="100%" stopColor="rgba(40,20,70,0)" />
+        </radialGradient>
+      </defs>
+      <path
+        fill="url(#toothGlow)"
+        d="M100 18c-28 0-50 18-58 46-6 22-2 42 8 62 8 16 14 34 12 54-2 18 2 36 12 48 8 10 20 14 28 8 6-4 8-14 6-28-2-18 2-34 10-46 8 12 12 28 10 46-2 14 0 24 6 28 8 6 20 2 28-8 10-12 14-30 12-48-2-20 4-38 12-54 10-20 14-40 8-62C150 36 128 18 100 18z"
+      />
+    </svg>
+  );
+}
+
+function GoldArc({ className }: { className?: string }) {
   return (
     <svg
       data-hero-ornament
       aria-hidden
-      viewBox="0 0 420 180"
+      viewBox="0 0 360 120"
       fill="none"
       className={cn("pointer-events-none text-[var(--color-gold)]", className)}
     >
@@ -48,37 +70,71 @@ function GoldOrnament({ className }: { className?: string }) {
         className="gold-stroke"
         stroke="currentColor"
         strokeWidth="1"
-        opacity="0.7"
+        opacity="0.75"
         pathLength={1}
-        d="M20 140 C 80 40, 160 20, 210 70 C 260 120, 320 40, 400 90"
-      />
-      <path
-        data-gold-path
-        className="gold-stroke"
-        stroke="currentColor"
-        strokeWidth="0.75"
-        opacity="0.35"
-        pathLength={1}
-        d="M40 160 C 110 70, 180 50, 230 95 C 280 140, 340 70, 390 110"
+        d="M12 88 C 70 18, 140 8, 190 48 C 240 88, 290 28, 348 62"
       />
       <circle
         data-gold-dot
-        cx="210"
-        cy="70"
-        r="2.5"
+        cx="190"
+        cy="48"
+        r="2.25"
         fill="currentColor"
-        opacity="0.85"
+        opacity="0.9"
       />
     </svg>
   );
 }
 
+function PillarIcon({ type }: { type: (typeof SERVICE_PILLARS)[number]["icon"] }) {
+  const common = {
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: 1.4,
+    strokeLinecap: "round" as const,
+    strokeLinejoin: "round" as const,
+  };
+
+  switch (type) {
+    case "implant":
+      return (
+        <svg viewBox="0 0 32 32" className="size-7" aria-hidden>
+          <path {...common} d="M16 4v8M12 8h8" />
+          <path {...common} d="M13 12c0 8 1.5 14 3 16 1.5-2 3-8 3-16" />
+          <path {...common} d="M11 14h10" />
+        </svg>
+      );
+    case "smile":
+      return (
+        <svg viewBox="0 0 32 32" className="size-7" aria-hidden>
+          <path {...common} d="M8 14c2 6 14 6 16 0" />
+          <circle {...common} cx="11" cy="11" r="1.2" fill="currentColor" />
+          <circle {...common} cx="21" cy="11" r="1.2" fill="currentColor" />
+          <rect {...common} x="7" y="8" width="18" height="14" rx="4" />
+        </svg>
+      );
+    case "tech":
+      return (
+        <svg viewBox="0 0 32 32" className="size-7" aria-hidden>
+          <circle {...common} cx="16" cy="16" r="5" />
+          <path {...common} d="M16 5v3M16 24v3M5 16h3M24 16h3M8 8l2 2M22 22l2 2M8 24l2-2M22 10l2-2" />
+        </svg>
+      );
+    default:
+      return (
+        <svg viewBox="0 0 32 32" className="size-7" aria-hidden>
+          <path {...common} d="M16 6c-4 0-7 3-7 7 0 6 7 13 7 13s7-7 7-13c0-4-3-7-7-7z" />
+          <circle {...common} cx="16" cy="13" r="2.5" />
+        </svg>
+      );
+  }
+}
+
 export function Hero() {
   const root = useRef<HTMLElement>(null);
-  const exploreRef = useRef<HTMLAnchorElement>(null);
 
   useGSAP(
-    (_ctx, contextSafe) => {
+    () => {
       if (prefersReducedMotion()) {
         gsap.set("[data-gold-path]", { strokeDasharray: 1, strokeDashoffset: 0 });
         return;
@@ -86,96 +142,71 @@ export function Hero() {
 
       const ease = gsap.parseEase(`cubic-bezier(${EASE_GSAP.join(",")})`);
       const tl = gsap.timeline({ defaults: { ease } });
-      const desktopFig = root.current?.querySelector<HTMLElement>(
-        "[data-hero-figures-desktop]",
-      );
-      const figuresStage = root.current?.querySelector<HTMLElement>(
-        "[data-hero-figures]",
-      );
 
       gsap.set("[data-gold-path]", { strokeDasharray: 1, strokeDashoffset: 1 });
       gsap.set("[data-gold-dot]", { scale: 0, transformOrigin: "50% 50%" });
 
-      tl.from("[data-hero-env]", {
-        scale: 1.06,
+      tl.from("[data-hero-atmosphere]", {
         autoAlpha: 0,
-        duration: 1.5,
+        scale: 1.04,
+        duration: 1.35,
       })
         .from(
-          figuresStage ?? "[data-hero-figures]",
-          { yPercent: 8, autoAlpha: 0, duration: 1.15 },
-          0.18,
+          "[data-hero-tooth]",
+          { autoAlpha: 0, scale: 0.86, duration: 1.2 },
+          0.15,
         )
-        .from("[data-hero-scrim]", { autoAlpha: 0, duration: 0.9 }, 0.08)
         .from(
-          "[data-hero-frame]",
-          { scale: 1.04, autoAlpha: 0, duration: 1.1 },
-          0.25,
+          "[data-hero-portrait]",
+          {
+            xPercent: 18,
+            autoAlpha: 0,
+            scale: 1.06,
+            duration: 1.25,
+            transformOrigin: "80% 50%",
+          },
+          0.28,
         )
-        .to(
-          "[data-gold-path]",
-          { strokeDashoffset: 0, duration: 1.35, stagger: 0.12 },
-          0.4,
-        )
-        .to("[data-gold-dot]", { scale: 1, duration: 0.45 }, 0.95)
+        .from("[data-hero-eyebrow]", { y: 14, autoAlpha: 0, duration: 0.55 }, 0.45)
         .from(
           "[data-hero-line]",
-          { yPercent: 110, duration: 0.9, stagger: 0.09 },
-          0.45,
+          { yPercent: 115, duration: 0.95, stagger: 0.1 },
+          0.55,
         )
-        .from("[data-hero-eyebrow]", { autoAlpha: 0, y: 8, duration: 0.5 }, 0.55)
-        .from("[data-hero-sub]", { autoAlpha: 0, duration: 0.5 }, 0.85)
-        .from("[data-hero-cta]", { autoAlpha: 0, duration: 0.55 }, 0.95)
-        .from("[data-hero-side]", { autoAlpha: 0, duration: 0.5 }, 1.0)
-        .from("[data-hero-foot]", { autoAlpha: 0, duration: 0.45 }, 1.05);
-
-      gsap.to("[data-hero-env] img", {
-        yPercent: 8,
-        scale: 1.06,
-        ease: "none",
-        scrollTrigger: {
-          trigger: root.current,
-          start: "top top",
-          end: "bottom top",
-          scrub: true,
-        },
-      });
+        .from("[data-hero-support]", { y: 12, autoAlpha: 0, duration: 0.5 }, 0.9)
+        .from(
+          "[data-hero-signature]",
+          { autoAlpha: 0, y: 10, duration: 0.55 },
+          0.95,
+        )
+        .from("[data-hero-cta]", { y: 18, autoAlpha: 0, duration: 0.6 }, 1.05)
+        .from("[data-hero-secondary]", { autoAlpha: 0, duration: 0.45 }, 1.2)
+        .to(
+          "[data-gold-path]",
+          { strokeDashoffset: 0, duration: 1.2 },
+          0.7,
+        )
+        .to("[data-gold-dot]", { scale: 1, duration: 0.4 }, 1.15)
+        .from("[data-hero-pillars]", { y: 24, autoAlpha: 0, duration: 0.7 }, 1.25);
 
       const mm = gsap.matchMedia();
-      const mobileFig = root.current?.querySelector<HTMLElement>(
-        "[data-hero-figures-mobile]",
-      );
 
-      mm.add("(max-width: 639px)", () => {
-        if (mobileFig) {
-          gsap.to(mobileFig, {
-            yPercent: -10,
-            scale: 1.03,
-            ease: "none",
-            scrollTrigger: {
-              trigger: root.current,
-              start: "top top",
-              end: "bottom top",
-              scrub: 0.7,
-            },
-          });
-        }
-
-        gsap.to("[data-hero-eyebrow]", {
-          y: -16,
-          autoAlpha: 0,
+      mm.add("(max-width: 767px)", () => {
+        gsap.to("[data-hero-portrait]", {
+          yPercent: -8,
+          scale: 1.04,
           ease: "none",
           scrollTrigger: {
             trigger: root.current,
             start: "top top",
-            end: "30% top",
-            scrub: true,
+            end: "bottom top",
+            scrub: 0.7,
           },
         });
 
         gsap.to("[data-hero-copy]", {
-          yPercent: -12,
-          autoAlpha: 0.4,
+          yPercent: -10,
+          autoAlpha: 0.45,
           ease: "none",
           scrollTrigger: {
             trigger: root.current,
@@ -185,50 +216,31 @@ export function Hero() {
           },
         });
 
-        gsap.to("[data-hero-foot]", {
-          y: 18,
-          autoAlpha: 0,
+        gsap.to("[data-hero-tooth]", {
+          yPercent: 12,
+          autoAlpha: 0.15,
           ease: "none",
           scrollTrigger: {
             trigger: root.current,
             start: "top top",
-            end: "40% top",
+            end: "bottom top",
             scrub: true,
           },
         });
       });
 
-      mm.add("(min-width: 640px)", () => {
-        if (desktopFig) {
-          gsap.fromTo(
-            desktopFig,
-            { yPercent: 0, scale: 1, transformOrigin: "50% 100%" },
-            {
-              yPercent: -14,
-              scale: 1.05,
-              ease: "none",
-              scrollTrigger: {
-                trigger: root.current,
-                start: "top top",
-                end: "bottom top",
-                scrub: 0.85,
-              },
-            },
-          );
-        }
-
-        if (figuresStage) {
-          gsap.to(figuresStage, {
-            yPercent: -5,
-            ease: "none",
-            scrollTrigger: {
-              trigger: root.current,
-              start: "top top",
-              end: "bottom top",
-              scrub: 1.1,
-            },
-          });
-        }
+      mm.add("(min-width: 768px)", () => {
+        gsap.to("[data-hero-portrait]", {
+          yPercent: -12,
+          scale: 1.05,
+          ease: "none",
+          scrollTrigger: {
+            trigger: root.current,
+            start: "top top",
+            end: "bottom top",
+            scrub: 0.85,
+          },
+        });
 
         gsap.to("[data-hero-copy]", {
           yPercent: -6,
@@ -236,15 +248,15 @@ export function Hero() {
           ease: "none",
           scrollTrigger: {
             trigger: root.current,
-            start: "42% top",
+            start: "35% top",
             end: "bottom top",
             scrub: true,
           },
         });
 
         gsap.to("[data-hero-ornament]", {
-          yPercent: -18,
-          autoAlpha: 0.35,
+          yPercent: -20,
+          autoAlpha: 0.3,
           ease: "none",
           scrollTrigger: {
             trigger: root.current,
@@ -254,80 +266,6 @@ export function Hero() {
           },
         });
       });
-
-      const explore = exploreRef.current;
-      if (!explore) return;
-
-      const circle = explore.querySelector<HTMLElement>("[data-hero-cta-circle]");
-      const arrow = explore.querySelector<HTMLElement>("[data-hero-cta-arrow]");
-      const ring = explore.querySelector<HTMLElement>("[data-hero-cta-ring]");
-
-      if (circle) {
-        gsap.to(circle, {
-          scale: 1.035,
-          duration: 2.6,
-          ease: "sine.inOut",
-          yoyo: true,
-          repeat: -1,
-        });
-      }
-      if (arrow) {
-        gsap.to(arrow, {
-          x: 4,
-          duration: 1.6,
-          ease: "sine.inOut",
-          yoyo: true,
-          repeat: -1,
-          delay: 0.2,
-        });
-      }
-      if (ring) {
-        gsap.fromTo(
-          ring,
-          { scale: 1, autoAlpha: 0.45 },
-          {
-            scale: 1.4,
-            autoAlpha: 0,
-            duration: 2.8,
-            ease: "power1.out",
-            repeat: -1,
-            transformOrigin: "50% 50%",
-          },
-        );
-      }
-
-      if (!isFinePointer() || !contextSafe) return;
-
-      const onMove = contextSafe((e: MouseEvent) => {
-        const rect = explore.getBoundingClientRect();
-        const dx = e.clientX - (rect.left + rect.width / 2);
-        const dy = e.clientY - (rect.top + rect.height / 2);
-        gsap.to(explore, {
-          x: dx * 0.14,
-          y: dy * 0.16,
-          duration: 0.55,
-          ease: "power3.out",
-          overwrite: "auto",
-        });
-      });
-
-      const onLeave = contextSafe(() => {
-        gsap.to(explore, {
-          x: 0,
-          y: 0,
-          duration: 0.85,
-          ease: "elastic.out(1, 0.45)",
-          overwrite: "auto",
-        });
-      });
-
-      explore.addEventListener("mousemove", onMove);
-      explore.addEventListener("mouseleave", onLeave);
-
-      return () => {
-        explore.removeEventListener("mousemove", onMove);
-        explore.removeEventListener("mouseleave", onLeave);
-      };
     },
     { scope: root },
   );
@@ -337,218 +275,166 @@ export function Hero() {
       ref={root}
       id="top"
       data-theme="ink"
-      className="relative flex min-h-dvh flex-col overflow-hidden bg-[#1a0f2e] text-[#f7f3eb]"
+      className="relative overflow-hidden bg-[#1a0f2e] text-[#f7f3eb]"
     >
-      {/* Full-bleed clinic atmosphere */}
+      {/* Layered purple atmosphere — not a photo poster */}
       <div
-        data-hero-env
-        data-cursor="ATELIER"
-        className="absolute inset-0 z-0 overflow-hidden"
-      >
-        <img
-          src={HERO_ENVIRONMENT}
-          alt=""
-          draggable={false}
-          className="pointer-events-none absolute inset-0 size-full scale-105 object-cover object-[center_35%] select-none brightness-[0.55] contrast-[1.05] saturate-[0.85]"
-        />
-      </div>
-
-      {/* Deep plum atmospheric scrim — brand first */}
-      <div
-        data-hero-scrim
+        data-hero-atmosphere
         aria-hidden
-        className="pointer-events-none absolute inset-0 z-[1] bg-[linear-gradient(to_bottom,rgba(26,15,46,0.72)_0%,rgba(26,15,46,0.35)_28%,rgba(26,15,46,0.45)_58%,rgba(26,15,46,0.92)_100%)] sm:bg-[linear-gradient(105deg,rgba(26,15,46,0.88)_0%,rgba(26,15,46,0.55)_38%,rgba(36,21,56,0.28)_62%,rgba(26,15,46,0.55)_100%),linear-gradient(to_top,rgba(26,15,46,0.94)_0%,rgba(26,15,46,0.2)_32%,transparent_55%)]"
+        className="hero-atmosphere absolute inset-0 z-0"
       />
-
-      {/* Subtle champagne wash in upper right */}
       <div
         aria-hidden
-        className="pointer-events-none absolute -top-24 right-[-10%] z-[1] h-[55vh] w-[70vw] rounded-full bg-[radial-gradient(circle,rgba(201,169,110,0.14)_0%,transparent_68%)]"
+        className="pointer-events-none absolute inset-0 z-[1] opacity-[0.35] mix-blend-soft-light"
+        style={{
+          backgroundImage:
+            "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E\")",
+        }}
       />
 
-      <div className="relative z-[2] flex min-h-0 flex-1 flex-col justify-between">
-        {/* Mobile brand eyebrow */}
-        <p
-          data-hero-eyebrow
-          className="relative z-[3] shrink-0 px-5 pt-[5rem] text-[0.55rem] leading-[1.65] font-mono tracking-[0.28em] uppercase text-[#f7f3eb]/65 sm:hidden"
-        >
-          {clinic.practice} · {clinic.location}
-        </p>
+      <ToothWatermark className="absolute top-[18%] right-[-8%] z-[1] h-[58%] w-auto opacity-40 sm:right-[2%] sm:top-[12%] sm:h-[70%] sm:opacity-50" />
 
-        {/* Portrait stage with gold frame */}
-        <div
-          data-hero-figures
-          data-cursor="DOCTOR"
-          className="relative z-[2] flex min-h-0 w-full flex-1 items-end justify-center px-5 pt-3 sm:absolute sm:inset-x-0 sm:top-[8%] sm:bottom-[8%] sm:items-center sm:justify-end sm:px-8 sm:pt-0 md:top-[6%] md:right-0 md:left-auto md:w-[52%] lg:w-[48%] lg:px-16"
-        >
-          <div
-            data-hero-frame
-            className="relative w-full max-w-[20rem] sm:max-w-none sm:h-full sm:w-auto"
-          >
-            {/* Gold framing detail */}
-            <div
-              aria-hidden
-              className="pointer-events-none absolute -inset-[3px] rounded-[1.35rem] sm:rounded-[2.4rem] border border-[var(--color-gold)]/35"
-            />
-            <div
-              aria-hidden
-              className="pointer-events-none absolute -inset-2 rounded-[1.5rem] sm:rounded-[2.6rem] border border-[var(--color-gold)]/12"
-            />
-
-            <img
-              data-hero-figures-mobile
-              src={HERO_FIGURES_MOBILE}
-              alt={`${clinic.name}, ${clinic.practice}`}
-              draggable={false}
-              className="img-tone-violet pointer-events-none aspect-[4/5] w-full origin-bottom rounded-[1.25rem] object-cover object-[center_20%] shadow-[0_28px_70px_rgba(10,5,20,0.65)] will-change-transform select-none sm:hidden"
-            />
-            <img
-              data-hero-figures-desktop
-              src={HERO_FIGURES}
-              alt={`${clinic.name}, ${clinic.practice}`}
-              draggable={false}
-              className="img-tone-violet pointer-events-none hidden h-full max-h-[78vh] w-auto origin-center rounded-[2.25rem] object-cover object-[center_18%] shadow-[0_36px_90px_rgba(10,5,20,0.7)] will-change-transform select-none sm:block"
-            />
-          </div>
-        </div>
-
-        {/* Typographic brand narrative */}
-        <div className="pointer-events-none relative z-[3] flex shrink-0 flex-col px-5 pt-5 pb-2 sm:flex-1 sm:justify-center sm:px-8 sm:pt-28 sm:pb-0 md:px-12 md:pt-32 lg:px-16">
+      <div className="relative z-[2] mx-auto flex min-h-[100svh] max-w-7xl flex-col px-5 pt-[4.75rem] pb-0 sm:px-8 sm:pt-[5.5rem] md:px-12 lg:px-16">
+        {/* Asymmetric stage */}
+        <div className="relative flex min-h-0 flex-1 flex-col md:grid md:grid-cols-12 md:items-end md:gap-6 lg:gap-10">
+          {/* Copy column */}
           <div
             data-hero-copy
-            className="flex max-w-xl flex-col sm:mt-0"
+            className="relative z-[3] flex max-w-xl flex-col pt-2 md:col-span-6 md:pb-16 lg:col-span-5 lg:pb-20"
           >
-            <GoldOrnament className="mb-3 h-10 w-40 opacity-90 sm:mb-6 sm:h-14 sm:w-56" />
+            <GoldArc className="mb-3 h-8 w-36 opacity-90 sm:mb-5 sm:h-11 sm:w-48" />
 
-            <div className="min-w-0">
-              {/* Mobile — brand-first composition */}
-              <h1 className="font-editorial text-[clamp(2.15rem,10.5vw,3.1rem)] leading-[0.95] font-light tracking-[-0.02em] text-[#f7f3eb] sm:hidden">
-                <MaskLine>
-                  <span className="text-[var(--color-gold)]">Dr.</span> Pinky
-                </MaskLine>
-                <MaskLine>Varghese</MaskLine>
-              </h1>
+            <p
+              data-hero-eyebrow
+              className="font-mono text-[0.58rem] tracking-[0.32em] text-[#f7f3eb]/70 uppercase sm:text-[0.62rem]"
+            >
+              {clinic.heroEyebrow}
+            </p>
 
-              {/* Desktop / tablet — monumental brand */}
-              <h1 className="font-editorial hidden text-[clamp(3.2rem,5.6vw,5.75rem)] leading-[0.92] font-light tracking-[-0.025em] text-[#f7f3eb] sm:block">
-                <MaskLine>
-                  <span className="text-[var(--color-gold)]">Dr.</span> Pinky
-                </MaskLine>
-                <MaskLine>Varghese</MaskLine>
-              </h1>
+            <h1 className="mt-3 font-editorial text-[clamp(2.65rem,12vw,3.6rem)] leading-[0.92] font-light tracking-[-0.02em] text-[#f7f3eb] sm:mt-4 md:text-[clamp(3.4rem,6vw,5.4rem)]">
+              <MaskLine>{clinic.heroHeadline[0]}</MaskLine>
+              <MaskLine>
+                A{" "}
+                <span className="text-gold-accent italic">
+                  {clinic.heroAccentWord}
+                </span>
+              </MaskLine>
+            </h1>
 
-              <div data-hero-sub className="mt-4 sm:mt-7">
-                <div className="gold-rule mb-4 w-16 sm:mb-5 sm:w-20" />
-                <p className="font-display text-[1.05rem] leading-snug tracking-wide text-[#f7f3eb] sm:text-[1.35rem] md:text-[1.5rem]">
-                  {clinic.practice}
-                </p>
-                <p className="mt-2 max-w-[22rem] text-[0.85rem] leading-relaxed text-[#f7f3eb]/78 sm:mt-3 sm:text-[0.95rem]">
-                  {clinic.tagline}
-                </p>
-                <p className="mt-3 text-[0.55rem] font-mono tracking-[0.28em] uppercase text-[var(--color-gold)]/80 sm:text-[0.58rem]">
-                  Private Practice · {clinic.location}
-                </p>
-              </div>
+            {/* Brand lockup — hero-level signal */}
+            <div data-hero-signature className="mt-4 sm:mt-5">
+              <p className="font-script text-[1.65rem] leading-none text-[#f7f3eb] sm:text-[2rem]">
+                {clinic.name}
+              </p>
+              <p className="mt-1.5 font-mono text-[0.55rem] tracking-[0.24em] text-[var(--color-gold)]/85 uppercase">
+                {clinic.role}
+              </p>
             </div>
 
-            <a
-              ref={exploreRef}
-              href="#manifesto"
-              data-hero-cta
-              data-cursor="ENTER"
-              className="pointer-events-auto mt-7 mb-2 inline-flex w-fit items-center gap-4 sm:mt-12 sm:mb-0 sm:gap-5"
+            <p
+              data-hero-support
+              className="mt-4 max-w-[17rem] text-[0.78rem] leading-relaxed tracking-[0.04em] text-[#f7f3eb]/72 uppercase sm:mt-5 sm:max-w-sm sm:text-[0.82rem]"
             >
-              <span className="relative flex size-[4rem] shrink-0 items-center justify-center sm:size-[5rem] md:size-[5.5rem]">
-                <span
-                  data-hero-cta-ring
-                  aria-hidden="true"
-                  className="pointer-events-none absolute inset-0 rounded-full border border-[var(--color-gold)]/55"
-                />
-                <span
-                  data-hero-cta-circle
-                  className="relative z-[1] flex size-full items-center justify-center rounded-full bg-[#f7f3eb] text-[#1a0f2e] shadow-[0_0_0_1px_rgba(201,169,110,0.35)] will-change-transform transition-transform active:scale-[0.97]"
-                >
-                  <ArrowRight
-                    data-hero-cta-arrow
-                    className="size-[1.1rem] will-change-transform text-[#1a0f2e] sm:size-5"
-                    strokeWidth={1.25}
-                  />
+              {clinic.heroSupport}
+            </p>
+
+            <div className="mt-7 flex flex-col gap-4 sm:mt-9 sm:flex-row sm:items-center sm:gap-6">
+              <a
+                href="#visit"
+                data-hero-cta
+                data-cursor="BOOK"
+                className="cta-gold pointer-events-auto inline-flex min-h-12 w-full max-w-xs items-center justify-center gap-2.5 rounded-full px-6 py-3.5 font-sans text-[0.78rem] font-semibold tracking-[0.06em] transition-[filter,transform] duration-300 sm:w-auto sm:min-w-[13.5rem]"
+              >
+                <CalendarDays className="size-4 shrink-0" strokeWidth={1.75} />
+                <span>Book Appointment</span>
+                <ArrowRight className="size-4 shrink-0 opacity-80" strokeWidth={1.75} />
+              </a>
+
+              <a
+                href="#manifesto"
+                data-hero-secondary
+                data-cursor="STORY"
+                className="pointer-events-auto inline-flex items-center gap-3 self-start text-[0.72rem] tracking-[0.08em] text-[#f7f3eb]/80 transition-colors hover:text-[var(--color-gold)]"
+              >
+                <span className="flex size-9 items-center justify-center rounded-full border border-[var(--color-gold)]/45 text-[var(--color-gold)]">
+                  <Play className="size-3.5 fill-current" strokeWidth={1.5} />
                 </span>
-              </span>
-              <span className="flex flex-col gap-1 text-[0.55rem] font-mono leading-none tracking-[0.26em] uppercase text-[#f7f3eb]/85 sm:text-[0.6rem] sm:tracking-[0.28em]">
-                <span>Discover The</span>
-                <span>Practice</span>
-              </span>
-            </a>
+                <span className="font-mono text-[0.58rem] tracking-[0.22em] uppercase">
+                  Our Story
+                </span>
+              </a>
+            </div>
           </div>
 
-          <aside
-            data-hero-side
-            className="pointer-events-auto absolute right-8 bottom-10 hidden flex-col items-end gap-2 text-right sm:flex md:right-12 md:bottom-12 lg:right-16"
-          >
-            <span aria-hidden="true" className="mb-1 block h-px w-10 bg-[var(--color-gold)]/55" />
-            <span className="text-[0.55rem] font-mono tracking-[0.32em] uppercase text-[#f7f3eb]/45">
-              Private · Appointment Only
-            </span>
-            <p className="max-w-[13rem] font-display text-[0.95rem] leading-[1.3] tracking-tight text-[#f7f3eb]">
-              Implantology &amp; Smile Design
-            </p>
-            <a
-              href="#visit"
-              data-cursor="CONSULT"
-              className="group mt-2 inline-flex items-center gap-1.5 text-[0.55rem] font-mono tracking-[0.22em] uppercase text-[var(--color-gold)] transition-colors hover:text-white"
+          {/* Portrait column — overlaps layers */}
+          <div className="relative z-[2] -mx-2 mt-2 flex flex-1 items-end justify-end md:col-span-6 md:mx-0 md:mt-0 md:min-h-[70vh] lg:col-span-7">
+            <div
+              data-hero-portrait
+              data-cursor="DOCTOR"
+              className="relative w-[min(92%,22rem)] origin-bottom will-change-transform sm:w-[min(88%,26rem)] md:absolute md:right-0 md:bottom-0 md:w-[min(100%,34rem)] lg:w-[min(100%,38rem)]"
             >
-              <span>Reserve Consultation</span>
-              <ArrowRight
-                className="size-3 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-1"
-                strokeWidth={1.2}
+              {/* Soft purple glow behind portrait */}
+              <div
+                aria-hidden
+                className="soft-glow-purple absolute top-[10%] right-[5%] h-[70%] w-[70%] blur-2xl"
               />
-            </a>
-          </aside>
+
+              <div className="relative clip-portrait-fade">
+                <img
+                  src={HERO_FIGURES_MOBILE}
+                  alt={`${clinic.name}, ${clinic.role}`}
+                  draggable={false}
+                  className="img-tone-violet pointer-events-none relative z-[1] aspect-[4/5] w-full object-cover object-[center_12%] select-none sm:hidden"
+                />
+                <img
+                  src={HERO_FIGURES}
+                  alt={`${clinic.name}, ${clinic.role}`}
+                  draggable={false}
+                  className="img-tone-violet pointer-events-none relative z-[1] hidden aspect-[4/5] w-full object-cover object-[center_10%] select-none sm:block md:aspect-[3/4] md:max-h-[78vh]"
+                />
+              </div>
+
+              {/* Floating signature + quote over the fade */}
+              <div className="pointer-events-none absolute bottom-[18%] left-0 z-[2] max-w-[14rem] px-1 sm:bottom-[22%] sm:max-w-[16rem]">
+                <p className="font-script text-[1.35rem] leading-none text-[var(--color-gold-light)] sm:text-[1.6rem]">
+                  {clinic.name}
+                </p>
+                <p className="mt-2 font-editorial text-[0.82rem] leading-snug text-[#f7f3eb]/75 italic sm:text-[0.9rem]">
+                  “{clinic.heroQuote}”
+                </p>
+              </div>
+
+              {/* Thin gold contour accent */}
+              <div
+                aria-hidden
+                className="pointer-events-none absolute top-[8%] right-[6%] z-[2] h-[62%] w-[78%] rounded-[42%_58%_48%_52%/48%_42%_58%_52%] border border-[var(--color-gold)]/25"
+              />
+            </div>
+          </div>
         </div>
       </div>
 
-      {/* Bottom information bar */}
+      {/* Ivory transition + service pillars */}
+      <SectionWave variant="to-paper" className="relative z-[3]" />
+
       <div
-        data-hero-foot
-        className="relative z-[3] border-t border-[var(--color-gold)]/15 bg-transparent sm:bg-[rgba(26,15,46,0.78)] backdrop-blur-xs"
+        data-hero-pillars
+        className="relative z-[3] bg-[#f7f3eb] px-5 pb-10 text-[#1a0f2e] sm:px-8 sm:pb-14 md:px-12 lg:px-16"
       >
-        <div className="flex items-end justify-between gap-4 px-5 py-3.5 sm:hidden font-mono">
-          <p className="text-[0.46rem] tracking-[0.22em] uppercase text-[#f7f3eb]/55">
-            Implantology <span className="text-[var(--color-gold)]/40">/</span>{" "}
-            Smile Design
-          </p>
-          <div className="flex flex-col items-end gap-1 text-right">
-            <p className="text-[0.46rem] leading-[1.45] tracking-[0.22em] uppercase text-[#f7f3eb]/55">
-              Kochi · Kerala
-            </p>
-            <span aria-hidden="true" className="block h-px w-8 bg-[var(--color-gold)]/50" />
-          </div>
-        </div>
-
-        <div className="hidden grid-cols-[1fr_auto_1fr] items-center gap-4 px-8 py-3.5 sm:grid md:px-12 lg:px-16 font-mono">
-          <p className="truncate text-[0.52rem] tracking-[0.28em] uppercase text-[#f7f3eb]/50 md:text-[0.56rem]">
-            Implantology <span className="text-[var(--color-gold)]/35">/</span>{" "}
-            Smile Design <span className="text-[var(--color-gold)]/35">/</span>{" "}
-            Private Care
-          </p>
-
-          <div className="flex flex-col items-center gap-1">
-            <span className="text-[0.52rem] tracking-[0.32em] uppercase text-[#f7f3eb]/65">
-              Scroll
-            </span>
-            <span aria-hidden="true" className="h-4 w-px bg-[var(--color-gold)]/55 md:h-5" />
-          </div>
-
-          <div className="flex items-center justify-end gap-4">
-            <span
-              aria-hidden="true"
-              className="h-px w-14 bg-[var(--color-gold)]/20 md:w-24 lg:w-32"
-            />
-            <p className="text-[0.52rem] tracking-[0.28em] uppercase text-[#f7f3eb]/50 md:text-[0.56rem]">
-              Pavilion Suite 4 · The Crescent
-            </p>
-          </div>
+        <div className="mx-auto grid max-w-5xl grid-cols-2 gap-x-4 gap-y-7 sm:grid-cols-4 sm:gap-6">
+          {SERVICE_PILLARS.map((pillar) => (
+            <div
+              key={pillar.id}
+              className="flex flex-col items-center gap-2.5 text-center"
+            >
+              <span className="flex size-12 items-center justify-center text-[#3a2458]">
+                <PillarIcon type={pillar.icon} />
+              </span>
+              <span className="max-w-[7.5rem] text-[0.68rem] leading-snug font-medium tracking-[0.02em] text-[#2a1744] sm:text-[0.72rem]">
+                {pillar.label}
+              </span>
+            </div>
+          ))}
         </div>
       </div>
     </section>

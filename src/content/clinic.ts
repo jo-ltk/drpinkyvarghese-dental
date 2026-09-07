@@ -22,9 +22,16 @@ export interface StudyState {
 
 export const clinic = {
   name: "Dr. Pinky Varghese",
+  shortName: "Dr Pinky",
   practice: "Implantology & Smile Design",
+  role: "Implantologist & Smile Designer",
   location: "Kochi, Kerala",
   tagline: "Implantology and smile design — refined, unhurried, personal.",
+  heroEyebrow: "Expert Dental Care",
+  heroHeadline: ["More Than", "A Smile"],
+  heroAccentWord: "Smile",
+  heroSupport: "A healthier, happier, more confident you",
+  heroQuote: "There is a story behind every smile…",
   phoneDisplay: "+91 (0) 484 290 8800",
   phoneHref: "tel:+914842908800",
   whatsappHref:
@@ -35,7 +42,16 @@ export const clinic = {
     "Panampilly Nagar, Kochi, Kerala",
   ],
   hours: "Monday – Saturday · By Confirmed Appointment Only",
+  consultingAt: ["Ernakulam", "Aluva", "Kakkanad", "Angamaly"] as const,
 } as const;
+
+/** Compact service pillars shown beneath the hero wave */
+export const SERVICE_PILLARS = [
+  { id: "implants", label: "Dental Implants", icon: "implant" },
+  { id: "smile", label: "Smile Design", icon: "smile" },
+  { id: "tech", label: "Advanced Care", icon: "tech" },
+  { id: "focus", label: "Patient Focused", icon: "focus" },
+] as const;
 
 export const navLinks = [
   { label: "Manifesto", href: "#manifesto" },

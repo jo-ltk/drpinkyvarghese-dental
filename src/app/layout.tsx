@@ -1,5 +1,10 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Manrope, IBM_Plex_Mono } from "next/font/google";
+import {
+  Cormorant_Garamond,
+  Manrope,
+  IBM_Plex_Mono,
+  Great_Vibes,
+} from "next/font/google";
 
 import "./globals.css";
 
@@ -24,6 +29,13 @@ const ibmPlexMono = IBM_Plex_Mono({
   display: "swap",
 });
 
+const greatVibes = Great_Vibes({
+  variable: "--font-great-vibes",
+  subsets: ["latin"],
+  weight: ["400"],
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   title: "Dr. Pinky Varghese — Implantology & Smile Design, Kochi",
   description:
@@ -38,7 +50,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${cormorant.variable} ${manrope.variable} ${ibmPlexMono.variable} h-full antialiased`}
+      className={`${cormorant.variable} ${manrope.variable} ${ibmPlexMono.variable} ${greatVibes.variable} h-full antialiased`}
     >
       <body className="min-h-full font-sans antialiased selection:bg-[#c9a96e] selection:text-[#1a0f2e]">
         {children}

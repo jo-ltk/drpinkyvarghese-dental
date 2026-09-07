@@ -28,26 +28,29 @@ export default function Home() {
   useGSAP(
     () => {
       // Dynamic theme morphing — smoothly animates root CSS variables between dark (ink) & light (paper) worlds
-      gsap.utils.toArray<HTMLElement>("[data-theme]").forEach((section) => {
-        const theme = THEME[section.dataset.theme as ThemeName];
-        if (!theme) return;
+      // Only section-level theme markers (direct children of main)
+      gsap.utils
+        .toArray<HTMLElement>("main > [data-theme], footer[data-theme]")
+        .forEach((section) => {
+          const theme = THEME[section.dataset.theme as ThemeName];
+          if (!theme) return;
 
-        ScrollTrigger.create({
-          trigger: section,
-          start: "top 55%",
-          end: "bottom 55%",
-          onToggle: (self) => {
-            if (!self.isActive) return;
-            gsap.to(document.documentElement, {
-              "--bg": theme.bg,
-              "--fg": theme.fg,
-              duration: 0.85,
-              ease: "power2.out",
-              overwrite: "auto",
-            });
-          },
+          ScrollTrigger.create({
+            trigger: section,
+            start: "top 55%",
+            end: "bottom 55%",
+            onToggle: (self) => {
+              if (!self.isActive) return;
+              gsap.to(document.documentElement, {
+                "--bg": theme.bg,
+                "--fg": theme.fg,
+                duration: 0.85,
+                ease: "power2.out",
+                overwrite: "auto",
+              });
+            },
+          });
         });
-      });
 
       document.fonts?.ready?.then(() => ScrollTrigger.refresh());
     },
