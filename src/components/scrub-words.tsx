@@ -25,15 +25,15 @@ export function ScrubWords({ text, className, accents = [] }: ScrubWordsProps) {
 
       gsap.fromTo(
         words,
-        { opacity: 0.14 },
+        { opacity: 0.38 },
         {
           opacity: 1,
           ease: "none",
-          stagger: 0.5,
+          stagger: 0.45,
           scrollTrigger: {
             trigger: ref.current,
-            start: "top 80%",
-            end: "bottom 48%",
+            start: "top 82%",
+            end: "bottom 52%",
             scrub: true,
           },
         },

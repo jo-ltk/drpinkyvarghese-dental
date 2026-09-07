@@ -439,13 +439,13 @@ export function Hero() {
 
               <div data-hero-sub className="mt-4 sm:mt-7">
                 <div className="gold-rule mb-4 w-16 sm:mb-5 sm:w-20" />
-                <p className="font-display text-[1.05rem] leading-snug tracking-wide text-[#f7f3eb]/90 sm:text-[1.35rem] md:text-[1.5rem]">
+                <p className="font-display text-[1.05rem] leading-snug tracking-wide text-[#f7f3eb] sm:text-[1.35rem] md:text-[1.5rem]">
                   {clinic.practice}
                 </p>
-                <p className="mt-2 max-w-[22rem] text-[0.8rem] leading-relaxed text-[#f7f3eb]/55 sm:mt-3 sm:text-[0.9rem]">
+                <p className="mt-2 max-w-[22rem] text-[0.85rem] leading-relaxed text-[#f7f3eb]/78 sm:mt-3 sm:text-[0.95rem]">
                   {clinic.tagline}
                 </p>
-                <p className="mt-3 text-[0.52rem] font-mono tracking-[0.28em] uppercase text-[#f7f3eb]/45 sm:text-[0.56rem]">
+                <p className="mt-3 text-[0.55rem] font-mono tracking-[0.28em] uppercase text-[var(--color-gold)]/80 sm:text-[0.58rem]">
                   Private Practice · {clinic.location}
                 </p>
               </div>

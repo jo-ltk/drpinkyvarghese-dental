@@ -64,7 +64,7 @@ export function Manifesto() {
             className="font-display text-3xl leading-[1.22] font-light md:text-5xl lg:text-[3.75rem]"
           />
 
-          <div className="mt-12 flex flex-col gap-6 pt-10 border-t border-current/10 sm:flex-row sm:items-center sm:justify-between text-xs font-mono uppercase tracking-widest text-current/55">
+          <div className="mt-12 flex flex-col gap-6 pt-10 border-t border-current/10 sm:flex-row sm:items-center sm:justify-between text-xs font-mono uppercase tracking-widest text-current/70">
             <span>Implantology</span>
             <span className="hidden sm:inline text-[var(--color-gold)]">·</span>
             <span>Smile Design</span>
