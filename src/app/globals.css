@@ -1,26 +1,131 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/*
+  Pingy Dental Clinic global palette —
+  Inspired by high-end private architectural medical ateliers.
+  Deep botanical obsidian pine + warm porcelain travertine ivory + burnished bronze.
+*/
+@theme {
+  /* Primary surfaces */
+  --color-paper: #f4f0e8; /* warm porcelain alabaster / travertine */
+  --color-ink: #081411; /* deepest surgical botanical pine */
+  --color-botanical: #0d1e19; /* dark secondary pine */
+  --color-surface: #142a24; /* muted deep green surface */
+
+  /* Neutrals */
+  --color-stone: #9ea39e; /* warm titanium / stone */
+  --color-sage: #58756a; /* surgical sage */
+  --color-charcoal: #121614; /* deep obsidian charcoal for text on light */
+
+  /* Accents */
+  --color-bronze: #b6905a; /* burnished bronze / warm gold */
+  --color-earth: #7a6348; /* deeper earthen tone */
+  --color-clay: #c9ab80; /* soft warm porcelain clay */
+  --color-accent: #b6905a; /* signature metallic accent */
+
+  --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
+  --font-editorial: var(--font-bodoni), var(--font-fraunces), ui-serif, Georgia, serif;
+  --font-sans: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-mono), ui-monospace, "Cascadia Mono", monospace;
 }
 
+/* Live theme channel — GSAP ScrollTrigger morphs --bg/--fg as you scroll between worlds */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-bg: var(--bg);
+  --color-fg: var(--fg);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* First paint matches the hero (ink / deep botanical pine) before ScrollTrigger settles */
+:root {
+  --bg: #081411;
+  --fg: #f4f0e8;
+  --color-bronze: #b6905a;
+  --color-bronze-light: #c9ab80;
+  --color-line: rgba(18, 22, 20, 0.12);
+  --color-line-dark: rgba(244, 240, 232, 0.14);
+}
+
+html {
+  scroll-behavior: auto;
+}
+
+/* Custom companion cursor — desktop / fine pointer only */
+html.has-cursor,
+html.has-cursor * {
+  cursor: none !important;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+
+::selection {
+  background: var(--color-bronze);
+  color: #081411;
+}
+
+/* ---------- typography & utility primitives ---------- */
+
+.font-display {
+  font-optical-sizing: auto;
+}
+
+.font-editorial {
+  font-optical-sizing: auto;
+}
+
+.meta {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+/* Marquee track */
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-track {
+  animation: marquee var(--marquee-duration, 28s) linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
+}
+
+/* Pulsing status ring */
+@keyframes dot-pulse {
+  0% {
+    box-shadow: 0 0 0 0 color-mix(in oklab, var(--color-bronze) 45%, transparent);
+  }
+  70% {
+    box-shadow: 0 0 0 10px transparent;
+  }
+  100% {
+    box-shadow: 0 0 0 0 transparent;
+  }
+}
+
+.dot-pulse {
+  animation: dot-pulse 2.4s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+}
+
+/* Editorial image treatment */
+.img-tone {
+  filter: contrast(1.03) saturate(0.94);
+}
+
+/* Outline monumental type */
+.text-outline {
+  -webkit-text-stroke: 1px color-mix(in oklab, var(--fg) 50%, transparent);
+  color: transparent;
 }
