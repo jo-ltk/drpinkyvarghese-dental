@@ -98,20 +98,19 @@ export function TreatmentIndex() {
               Nº02 — The Treatment Index
             </span>
             <h2 className="mt-6 font-display text-4xl leading-[1.08] font-light md:text-5xl lg:text-6xl">
-              Five protocols,
+              Five pathways,
               <br />
-              <em className="italic text-[var(--color-bronze)]">unhurried care.</em>
+              <em className="italic text-[var(--color-gold)]">one refined practice.</em>
             </h2>
             <p className="mt-6 max-w-xs text-sm leading-relaxed text-current opacity-65">
-              Scroll through the index. Each procedure is designed to conserve
-              natural biological structures and preserve enamel margins down to
-              the micron.
+              Scroll through the index. Each pathway is designed around clarity,
+              comfort, and lasting aesthetic confidence.
             </p>
             <div className="mt-8">
               <a
                 href="#visit"
                 data-cursor="CONSULT"
-                className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-[var(--color-bronze)] hover:underline"
+                className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-[var(--color-gold)] hover:underline"
               >
                 <span>Consultation Protocol</span>
                 <ArrowUpRight className="size-3.5" />
@@ -136,35 +135,33 @@ export function TreatmentIndex() {
               {/* Photographic plate with counter-drift */}
               <div
                 data-cursor="VIEW"
-                className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl border border-current/15 bg-current/5 shadow-2xl"
+                className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl border border-[var(--color-gold)]/20 bg-current/5 shadow-2xl"
               >
                 <img
                   data-panel-img
                   src={item.img}
                   alt={item.name}
                   loading="lazy"
-                  className="img-tone pointer-events-none h-full w-[120%] -ml-[10%] object-cover will-change-transform transition-transform duration-700 group-hover:scale-105"
+                  className="img-tone-violet pointer-events-none h-full w-[120%] -ml-[10%] object-cover will-change-transform transition-transform duration-700 group-hover:scale-105"
                 />
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#081411]/85 via-transparent to-transparent" />
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#1a0f2e]/88 via-transparent to-transparent" />
 
-                {/* Plate code badge */}
-                <div className="absolute top-4 left-4 rounded-full bg-black/60 px-3 py-1 font-mono text-[0.625rem] uppercase tracking-widest text-[var(--color-bronze)] backdrop-blur-md border border-white/10">
+                <div className="absolute top-4 left-4 rounded-full bg-[#1a0f2e]/65 px-3 py-1 font-mono text-[0.625rem] uppercase tracking-widest text-[var(--color-gold)] backdrop-blur-md border border-[var(--color-gold)]/25">
                   {item.code}
                 </div>
 
                 <div className="absolute bottom-4 inset-x-4">
-                  <span className="font-mono text-[0.625rem] uppercase tracking-widest text-[var(--color-bronze)]">
+                  <span className="font-mono text-[0.625rem] uppercase tracking-widest text-[var(--color-gold)]">
                     {item.duration}
                   </span>
-                  <h3 className="font-display text-xl sm:text-2xl font-light text-[#f4f0e8] leading-snug">
+                  <h3 className="font-display text-xl sm:text-2xl font-light text-[#f7f3eb] leading-snug">
                     {item.name}
                   </h3>
                 </div>
               </div>
 
-              {/* Plate caption and principles */}
               <div className="mt-5 space-y-2">
-                <p className="font-mono text-xs text-[var(--color-bronze)] uppercase tracking-wider">
+                <p className="font-mono text-xs text-[var(--color-gold)] uppercase tracking-wider">
                   {item.nature}
                 </p>
                 <p className="text-xs sm:text-sm leading-relaxed text-current opacity-70">

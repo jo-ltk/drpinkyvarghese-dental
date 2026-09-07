@@ -53,7 +53,7 @@ export function ScrubWords({ text, className, accents = [] }: ScrubWordsProps) {
             data-word
             className={cn(
               "inline will-change-[opacity]",
-              isAccent && "font-[family-name:var(--font-display)] italic text-[var(--color-bronze)]",
+              isAccent && "font-[family-name:var(--font-display)] italic text-[var(--color-gold)]",
             )}
           >
             {word}{" "}

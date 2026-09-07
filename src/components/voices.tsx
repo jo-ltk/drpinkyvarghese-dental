@@ -38,8 +38,8 @@ export function Voices() {
           <span className="meta text-current opacity-50">
             Nº06 — Patient Perspectives
           </span>
-          <span className="font-mono text-xs text-[var(--color-bronze)]">
-            Unhurried Care
+          <span className="font-mono text-xs text-[var(--color-gold)]">
+            Patient Voices
           </span>
         </div>
 
@@ -48,10 +48,10 @@ export function Voices() {
             <blockquote
               key={voice.name}
               data-quote-card
-              className="relative flex flex-col justify-between rounded-2xl border border-current/15 bg-current/5 p-8 shadow-xl backdrop-blur-xs transition-transform duration-500 hover:-translate-y-1"
+              className="relative flex flex-col justify-between rounded-2xl border border-[var(--color-gold)]/18 bg-white/[0.03] p-8 shadow-xl backdrop-blur-xs transition-transform duration-500 hover:-translate-y-1"
             >
               <div>
-                <Quote className="size-6 text-[var(--color-bronze)] opacity-80 mb-6" />
+                <Quote className="size-6 text-[var(--color-gold)] opacity-80 mb-6" />
                 <p className="font-display text-lg sm:text-xl font-light leading-[1.38] text-current">
                   “{voice.quote}”
                 </p>
@@ -61,7 +61,7 @@ export function Voices() {
                 <cite className="not-italic font-mono text-xs font-semibold uppercase tracking-wider text-current block">
                   {voice.name}
                 </cite>
-                <span className="font-mono text-[0.6875rem] text-[var(--color-bronze)] block mt-0.5">
+                <span className="font-mono text-[0.6875rem] text-[var(--color-gold)] block mt-0.5">
                   {voice.note}
                 </span>
               </footer>

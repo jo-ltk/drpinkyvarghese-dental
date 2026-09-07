@@ -22,9 +22,9 @@ export interface StudyState {
 
 export const clinic = {
   name: "Dr. Pinky Varghese",
-  practice: "Private Dental Atelier",
+  practice: "Implantology & Smile Design",
   location: "Kochi, Kerala",
-  tagline: "Where precision meets the luxury of unhurried time.",
+  tagline: "Implantology and smile design — refined, unhurried, personal.",
   phoneDisplay: "+91 (0) 484 290 8800",
   phoneHref: "tel:+914842908800",
   whatsappHref:
@@ -41,135 +41,135 @@ export const navLinks = [
   { label: "Manifesto", href: "#manifesto" },
   { label: "Index", href: "#treatments" },
   { label: "Anatomy", href: "#anatomy" },
-  { label: "Atelier", href: "#atelier" },
+  { label: "Clinician", href: "#dentist" },
   { label: "Spaces", href: "#spaces" },
   { label: "Consultation", href: "#visit" },
 ];
 
-/** Full-bleed architectural environment for the hero */
+/** Full-bleed clinic atmosphere for the hero */
 export const HERO_ENVIRONMENT =
-  "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=2000&q=85";
+  "https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=2000&q=85";
 
-/** Foreground architectural sculptural composition for the hero */
+/** Editorial doctor / clinic portrait for the hero stage */
 export const HERO_FIGURES =
-  "https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=1600&q=85";
+  "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=1600&q=85";
 
 export const HERO_FIGURES_MOBILE =
-  "https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=1200&q=85";
+  "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=1200&q=85";
 
 /** Curated Treatment Index — Pinned horizontal scroll plates */
 export const TREATMENTS: TreatmentObject[] = [
   {
     id: "treat-001",
     index: "001",
-    code: "DX·BIO",
-    name: "Biomimetic Diagnostics",
-    nature: "High-magnification microscopy · Occlusal balance",
+    code: "IMP·DES",
+    name: "Implant Consultation",
+    nature: "Digital planning · Personalised pathway",
     duration: "60 to 90 min",
     disciplines: [
-      "Microscopic optical assessment",
-      "Digital occlusal kinetics",
-      "Biological risk profiling",
+      "Diagnostic imaging review",
+      "Treatment pathway mapping",
+      "Restorative planning dialogue",
     ],
-    img: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=1200&q=80",
-    copy: "High-resolution digital mapping and dynamic occlusion review. Every finding is explored together on expansive calibrated displays before any intervention is conceived.",
+    img: "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&w=1200&q=80",
+    copy: "A calm, thorough consultation to understand your goals, review imaging, and outline a clear implantology pathway — without pressure or haste.",
   },
   {
     id: "treat-002",
     index: "002",
-    code: "RES·CER",
-    name: "Ceramic Inlays & Veneers",
-    nature: "Polychromatic porcelain · Micron margins",
+    code: "SML·DES",
+    name: "Smile Design Dialogue",
+    nature: "Proportions · Shade · Harmony",
     duration: "Bespoke sittings",
     disciplines: [
-      "Sub-micron adhesive preparation",
-      "Translucent enamel replication",
-      "Zero unnecessary reduction",
+      "Facial proportion review",
+      "Shade & form exploration",
+      "Preview-led planning",
     ],
     img: "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=1200&q=80",
-    copy: "Restorations engineered to mirror the physical flexure, refractive index, and durability of native enamel — bonded with microscopic precision.",
+    copy: "An editorial approach to smile aesthetics — balancing facial harmony, enamel character, and natural light so the result feels unmistakably yours.",
   },
   {
     id: "treat-003",
     index: "003",
-    code: "ORT·ALN",
-    name: "Facial Harmony & Alignment",
-    nature: "Airway-aware ergonomics · Minimalist aligners",
+    code: "RES·CER",
+    name: "Ceramic Restorations",
+    nature: "Porcelain veneers · Micron margins",
     duration: "Phased precision",
     disciplines: [
-      "Facial symmetry mapping",
-      "Joint stability guidance",
-      "Unhurried biological movement",
+      "Conservative preparation",
+      "Translucent ceramic layering",
+      "Margin refinement",
     ],
-    img: "https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&w=1200&q=80",
-    copy: "Carefully calibrated tooth movement planned around overall facial proportions, breathing ergonomics, and lifelong craniomandibular stability.",
+    img: "https://images.unsplash.com/photo-1598256989800-fe5f95da9787?auto=format&fit=crop&w=1200&q=80",
+    copy: "Restorations crafted to mirror natural enamel — planned carefully, refined under focus, and finished for lasting quiet confidence.",
   },
   {
     id: "treat-004",
     index: "004",
     code: "PRV·CALM",
-    name: "Sensory Guided Prophylaxis",
-    nature: "Airflow warm micro-mist · Acoustic calm",
+    name: "Gentle Preventive Care",
+    nature: "Comfort-led prophylaxis · Calm space",
     duration: "45 to 60 min",
     disciplines: [
-      "Guided biofilm therapy",
-      "Zero-scrape warm water air polish",
-      "Preventive remineralization",
+      "Guided biofilm care",
+      "Soft tissue comfort",
+      "Preventive guidance",
     ],
     img: "https://images.unsplash.com/photo-1629909615184-74f495363b67?auto=format&fit=crop&w=1200&q=80",
-    copy: "Gentle warm ultrasonic and erythritol airflow prophylaxis in an acoustic space designed to quiet autonomic nervous system reflexes.",
+    copy: "Preventive visits designed around calm pacing and sensory comfort — so oral health feels restorative rather than clinical.",
   },
   {
     id: "treat-005",
     index: "005",
-    code: "LON·BIO",
-    name: "Tissue Architecture & Longevity",
-    nature: "Periodontal conservation · Cellular renewal",
+    code: "LON·CARE",
+    name: "Long-Term Smile Care",
+    nature: "Maintenance · Continuity · Trust",
     duration: "Individualized protocol",
     disciplines: [
-      "Micro-connective tissue support",
-      "Biocompatible mineralization",
-      "Decade-horizon monitoring",
+      "Recall planning",
+      "Tissue & implant monitoring",
+      "Decade-horizon guidance",
     ],
     img: "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1200&q=80",
-    copy: "Proactive biological scaffolding designed to safeguard your native bone, gingival health, and dentition against aging and systemic stress.",
+    copy: "Ongoing care that protects what we restore — structured follow-up, clear communication, and continuity you can rely on.",
   },
 ];
 
 /** Orbital Anatomy Study configuration */
 export const STUDY = {
-  title: "Biomimetic Ceramic Restoration",
+  title: "Smile Architecture Study",
   img: "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=800&q=85",
   companionImg:
-    "https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=800&q=85",
+    "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&w=800&q=85",
   fragmentImg:
-    "https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&w=800&q=85",
+    "https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=800&q=85",
   states: [
     {
-      id: "conservation",
+      id: "harmony",
       parts: [
-        { text: "Native enamel structure", tone: "strong" },
-        { text: " is preserved down to the micron — ", tone: "mute" },
-        { text: "zero over-reduction", tone: "strong" },
-        { text: " of living biological tissue.", tone: "mute" },
+        { text: "Facial proportions", tone: "strong" },
+        { text: " guide every restorative choice — ", tone: "mute" },
+        { text: "form follows the person", tone: "strong" },
+        { text: ", never a template.", tone: "mute" },
       ],
     },
     {
-      id: "bonding",
+      id: "materials",
       parts: [
-        { text: "Multi-layer ceramics", tone: "strong" },
-        { text: " replicate the light dispersion of dentin. ", tone: "mute" },
-        { text: "Microscopic adhesive margins", tone: "strong" },
-        { text: " sealed under high magnification.", tone: "mute" },
+        { text: "Contemporary ceramics", tone: "strong" },
+        { text: " catch light the way enamel does. ", tone: "mute" },
+        { text: "Margins are refined", tone: "strong" },
+        { text: " with quiet precision.", tone: "mute" },
       ],
     },
     {
       id: "longevity",
       parts: [
-        { text: "Restorations flex naturally", tone: "strong" },
-        { text: " with normal chewing kinetics. Built for ", tone: "mute" },
-        { text: "unhurried longevity", tone: "strong" },
-        { text: " that outlasts trends.", tone: "mute" },
+        { text: "Implants and restorations", tone: "strong" },
+        { text: " are planned for daily life. Built for ", tone: "mute" },
+        { text: "enduring confidence", tone: "strong" },
+        { text: " — not fleeting trends.", tone: "mute" },
       ],
     },
   ] satisfies StudyState[],
@@ -179,22 +179,22 @@ export const STUDY = {
 export const LOOKBOOK = [
   {
     src: "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1600&q=85",
-    caption: "Chapter 01 — The Consultation Lounge, warm travertine & dialogue",
+    caption: "Chapter 01 — The Consultation Lounge",
     speed: 0.12,
   },
   {
     src: "https://images.unsplash.com/photo-1629909615184-74f495363b67?auto=format&fit=crop&w=1600&q=85",
-    caption: "Chapter 02 — The Daylight Operatory, acoustic dampening & daylight",
+    caption: "Chapter 02 — The Daylight Operatory",
     speed: -0.09,
   },
   {
     src: "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1600&q=85",
-    caption: "Chapter 03 — The Rest Sanctuary, quiet transition & organic tea",
+    caption: "Chapter 03 — The Rest Sanctuary",
     speed: 0.14,
   },
   {
     src: "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=1600&q=85",
-    caption: "Chapter 04 — The Ceramic Bench, handcrafted precision margins",
+    caption: "Chapter 04 — The Ceramic Bench",
     speed: -0.11,
   },
 ];
@@ -202,20 +202,20 @@ export const LOOKBOOK = [
 export const VOICES = [
   {
     quote:
-      "For the first time, a dentist spent an hour simply listening to my concerns and examining my bite kinematics before touching an instrument.",
+      "For the first time, a dentist spent an hour simply listening to my concerns before discussing any treatment path.",
     name: "A. Kurian",
-    note: "Restorative Patient · Kochi",
+    note: "Smile Design Patient · Kochi",
   },
   {
     quote:
-      "The clinic feels like an art pavilion rather than a dental surgery. The unhurried pace transformed my relationship with oral health.",
+      "The clinic feels composed and calm rather than clinical. The unhurried pace changed how I feel about dental care.",
     name: "S. Menon",
     note: "Preventive Care · Aluva",
   },
   {
     quote:
-      "Dr. Pinky Varghese conserved a tooth three other clinics wanted to grind down for a crown. That was three years ago, and it remains flawless.",
+      "Dr. Pinky Varghese explained my implant options with clarity and care. I left feeling informed — never pressured.",
     name: "R. Nair",
-    note: "Biomimetic Restoration · Ernakulam",
+    note: "Implant Consultation · Ernakulam",
   },
 ];

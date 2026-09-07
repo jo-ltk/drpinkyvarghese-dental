@@ -53,8 +53,8 @@ export function MagneticButton({
       )}
     >
       {/* Accent fill sweeps up on hover */}
-      <span className="absolute inset-0 translate-y-full rounded-full bg-[var(--color-bronze)] transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-y-0" />
-      <span className="relative z-10 flex items-center gap-2.5 transition-colors duration-500 group-hover:text-[#081411]">
+      <span className="absolute inset-0 translate-y-full rounded-full bg-[var(--color-gold)] transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-y-0" />
+      <span className="relative z-10 flex items-center gap-2.5 transition-colors duration-500 group-hover:text-[#1a0f2e]">
         {children}
       </span>
     </a>

@@ -79,14 +79,14 @@ export function SiteFooter() {
     >
       {/* Top Ticker Marquee */}
       <Marquee className="border-y border-current/15 py-3.5" duration={24}>
-        <span className="meta flex items-center text-[var(--color-bronze)]">
-          <span className="px-6">Single-Operatory Dedicated Care</span>
+        <span className="meta flex items-center text-[var(--color-gold)]">
+          <span className="px-6">Implantology & Smile Design</span>
           <span className="size-1 rounded-full bg-current" />
           <span className="px-6">By Confirmed Appointment Only</span>
           <span className="size-1 rounded-full bg-current" />
-          <span className="px-6">Biomimetic Enamel Preservation</span>
+          <span className="px-6">Private Practice · Kochi</span>
           <span className="size-1 rounded-full bg-current" />
-          <span className="px-6">Pavilion Suite 4 · Kochi, Kerala</span>
+          <span className="px-6">Pavilion Suite 4 · The Crescent</span>
           <span className="size-1 rounded-full bg-current" />
         </span>
       </Marquee>
@@ -97,9 +97,9 @@ export function SiteFooter() {
             data-footer-reveal
             className="font-display text-4xl leading-[1.06] font-light sm:text-6xl md:text-7xl text-current"
           >
-            Preserve native,
+            Preserve beauty,
             <br />
-            <em className="italic text-[var(--color-bronze)]">heal</em> unhurried.
+            <em className="italic text-[var(--color-gold)]">design</em> with care.
           </h2>
 
           <div data-footer-reveal className="mt-12 flex justify-center">
@@ -120,12 +120,12 @@ export function SiteFooter() {
           <div>
             <span className="font-editorial text-lg text-current uppercase tracking-tight">
               {clinic.name}
-              <sup className="text-[0.55em] font-mono text-[var(--color-bronze)] ml-1">
+              <sup className="text-[0.55em] font-mono text-[var(--color-gold)] ml-1">
                 ®
               </sup>
             </span>
             <p className="meta mt-4 max-w-[18ch] text-current opacity-45">
-              A private atelier for unhurried biomimetic dentistry
+              Implantology & smile design — private practice in Kochi
             </p>
           </div>
 
@@ -137,7 +137,7 @@ export function SiteFooter() {
                   <li key={link.label}>
                     <a
                       href={link.href}
-                      className="text-xs sm:text-sm font-mono text-current opacity-70 transition-colors duration-300 hover:opacity-100 hover:text-[var(--color-bronze)]"
+                      className="text-xs sm:text-sm font-mono text-current opacity-70 transition-colors duration-300 hover:opacity-100 hover:text-[var(--color-gold)]"
                     >
                       {link.label}
                     </a>

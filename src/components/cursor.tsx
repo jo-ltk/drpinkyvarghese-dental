@@ -123,11 +123,11 @@ export function Cursor() {
     <div
       ref={ref}
       aria-hidden
-      className="pointer-events-none fixed left-0 top-0 z-[110] flex size-3 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-[var(--color-bronze)] shadow-[0_0_0_1.5px_rgba(244,240,232,0.9)] will-change-transform"
+      className="pointer-events-none fixed left-0 top-0 z-[110] flex size-3 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-[var(--color-gold)] shadow-[0_0_0_1.5px_rgba(247,243,235,0.9)] will-change-transform"
     >
       <span
         ref={labelRef}
-        className="meta pointer-events-none select-none text-[0.52rem] font-mono leading-none tracking-widest text-[#081411]"
+        className="meta pointer-events-none select-none text-[0.52rem] font-mono leading-none tracking-widest text-[#1a0f2e]"
       />
     </div>
   );

@@ -46,36 +46,36 @@ const ORBIT: OrbitItem[] = [
       "h-[min(32vmin,18rem)] w-[min(32vmin,18rem)] md:h-[min(40vmin,24rem)] md:w-[min(40vmin,24rem)] rounded-full overflow-hidden border border-current/20 shadow-2xl",
   },
   {
-    id: "disc-botanical",
+    id: "disc-plum",
     kind: "disc",
     desktop: { angle: 290, rx: 42, ry: 40, scale: 1 },
     mobile: { angle: 290, rx: 36, ry: 34, scale: 0.85 },
     className:
-      "size-[min(12vmin,6rem)] rounded-full bg-[radial-gradient(circle_at_35%_30%,#1c382e_0%,#0c1c16_60%,#06100c_100%)] shadow-lg border border-white/10 md:size-[min(15vmin,8rem)]",
+      "size-[min(12vmin,6rem)] rounded-full bg-[radial-gradient(circle_at_35%_30%,#4a2f6e_0%,#2b1a45_60%,#1a0f2e_100%)] shadow-lg border border-[var(--color-gold)]/20 md:size-[min(15vmin,8rem)]",
   },
   {
-    id: "orb-bronze",
+    id: "orb-gold",
     kind: "orb",
     desktop: { angle: 110, rx: 38, ry: 38, scale: 1 },
     mobile: { angle: 110, rx: 34, ry: 34, scale: 0.85 },
     className:
-      "size-[min(6vmin,3.2rem)] rounded-full bg-[radial-gradient(circle_at_30%_30%,#d8b888_0%,#a8895e_60%,#6d5535_100%)] shadow-md md:size-[min(8vmin,4.5rem)]",
+      "size-[min(6vmin,3.2rem)] rounded-full bg-[radial-gradient(circle_at_30%_30%,#dfc49a_0%,#c9a96e_55%,#8f7340_100%)] shadow-md md:size-[min(8vmin,4.5rem)]",
   },
   {
-    id: "pill-porcelain",
+    id: "pill-ivory",
     kind: "pill",
     desktop: { angle: 340, rx: 48, ry: 42, scale: 1 },
     mobile: { angle: 340, rx: 42, ry: 36, scale: 0.8 },
     className:
-      "h-6 w-32 rounded-full bg-[linear-gradient(90deg,var(--color-bronze)_0%,#f4f0e8_100%)] md:h-7 md:w-40 shadow-sm",
+      "h-6 w-32 rounded-full bg-[linear-gradient(90deg,var(--color-gold)_0%,#f7f3eb_100%)] md:h-7 md:w-40 shadow-sm",
   },
   {
-    id: "pill-titanium",
+    id: "pill-lavender",
     kind: "pill",
     desktop: { angle: 150, rx: 46, ry: 40, scale: 1 },
     mobile: { angle: 150, rx: 40, ry: 34, scale: 0.8 },
     className:
-      "h-5 w-28 rounded-full bg-[linear-gradient(90deg,#9ea39e_0%,#f4f0e8_100%)] md:h-6 md:w-36 shadow-sm",
+      "h-5 w-28 rounded-full bg-[linear-gradient(90deg,#9a8bb5_0%,#f7f3eb_100%)] md:h-6 md:w-36 shadow-sm",
   },
 ];
 
@@ -173,7 +173,7 @@ export function AnatomyStudy() {
         <span className="meta text-current opacity-50">
           Nº03 — The Anatomy Study
         </span>
-        <div className="flex items-center gap-2 font-mono text-xs text-[var(--color-bronze)]">
+        <div className="flex items-center gap-2 font-mono text-xs text-[var(--color-gold)]">
           <span>Phase 0{activeState + 1}</span>
           <span className="opacity-40">/</span>
           <span className="opacity-40">0{STATE_COUNT}</span>
@@ -209,8 +209,8 @@ export function AnatomyStudy() {
 
         {/* Central focal copy */}
         <div className="relative z-10 mx-auto max-w-sm text-center px-4">
-          <p className="font-mono text-[0.625rem] tracking-[0.24em] uppercase text-[var(--color-bronze)] mb-3">
-            Biomimetic Protocol
+          <p className="font-mono text-[0.625rem] tracking-[0.24em] uppercase text-[var(--color-gold)] mb-3">
+            Smile Architecture
           </p>
           <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-light leading-[1.25] text-current">
             {currentCopy.parts.map((part: StudyPart, i: number) => (
@@ -227,7 +227,7 @@ export function AnatomyStudy() {
             ))}
           </h2>
           <p className="mt-4 font-mono text-xs text-current opacity-45">
-            Micro-Adhesive Interface · Zero Aggressive Reduction
+            Proportion · Material · Longevity
           </p>
         </div>
       </div>
@@ -243,7 +243,7 @@ export function AnatomyStudy() {
             className={cn(
               "h-1.5 rounded-full transition-all duration-300",
               activeState === i
-                ? "w-8 bg-[var(--color-bronze)]"
+                ? "w-8 bg-[var(--color-gold)]"
                 : "w-2 bg-current/20 hover:bg-current/40",
             )}
           />

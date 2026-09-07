@@ -12,14 +12,14 @@ export const EASE_GSAP = [0.22, 1, 0.36, 1] as const;
 
 /**
  * Scroll-morph worlds — synchronized with CSS variables in `globals.css`.
- * Ink: Deep architectural botanical pine ground + warm alabaster porcelain text.
- * Paper: Warm travertine alabaster ground + obsidian charcoal text.
+ * Ink: Deep plum purple ground + ivory text.
+ * Paper: Ivory ground + deep plum text.
  */
 export const THEME = {
-  /* Dark: hero botanical atelier pine + porcelain text */
-  ink: { bg: "#081411", fg: "#f4f0e8" },
-  /* Light: warm alabaster travertine ground + obsidian charcoal text */
-  paper: { bg: "#f4f0e8", fg: "#121614" },
+  /* Dark: deep plum + ivory */
+  ink: { bg: "#1a0f2e", fg: "#f7f3eb" },
+  /* Light: ivory + plum charcoal */
+  paper: { bg: "#f7f3eb", fg: "#1a0f2e" },
 } as const;
 
 export type ThemeName = keyof typeof THEME;

@@ -1,22 +1,18 @@
 import type { Metadata } from "next";
-import { Fraunces, Bodoni_Moda, Space_Grotesk, IBM_Plex_Mono } from "next/font/google";
+import { Cormorant_Garamond, Manrope, IBM_Plex_Mono } from "next/font/google";
 
 import "./globals.css";
 
-const fraunces = Fraunces({
-  variable: "--font-fraunces",
+const cormorant = Cormorant_Garamond({
+  variable: "--font-cormorant",
   subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  style: ["normal", "italic"],
   display: "swap",
 });
 
-const bodoniModa = Bodoni_Moda({
-  variable: "--font-bodoni",
-  subsets: ["latin"],
-  display: "swap",
-});
-
-const spaceGrotesk = Space_Grotesk({
-  variable: "--font-sans",
+const manrope = Manrope({
+  variable: "--font-manrope",
   subsets: ["latin"],
   display: "swap",
 });
@@ -29,9 +25,9 @@ const ibmPlexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Dr. Pinky Varghese — Private Dental Atelier, Kochi",
+  title: "Dr. Pinky Varghese — Implantology & Smile Design, Kochi",
   description:
-    "An unhurried private dental practice dedicated to microscopic biomimetic preservation and architectural calm in Kochi, Kerala.",
+    "A private practice dedicated to implantology and smile design — elegant, unhurried care in Kochi, Kerala.",
 };
 
 export default function RootLayout({
@@ -42,9 +38,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${fraunces.variable} ${bodoniModa.variable} ${spaceGrotesk.variable} ${ibmPlexMono.variable} h-full antialiased`}
+      className={`${cormorant.variable} ${manrope.variable} ${ibmPlexMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full font-sans antialiased selection:bg-[#b6905a] selection:text-[#081411]">
+      <body className="min-h-full font-sans antialiased selection:bg-[#c9a96e] selection:text-[#1a0f2e]">
         {children}
       </body>
     </html>

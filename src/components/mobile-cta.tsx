@@ -26,8 +26,7 @@ export function MobileCta() {
 
   return (
     <div className="fixed inset-x-0 bottom-0 z-40 px-4 pb-[max(1rem,env(safe-area-inset-bottom))] pointer-events-none md:hidden">
-      <div className="pointer-events-auto mx-auto flex max-w-sm items-center justify-between gap-3 rounded-full bg-black/85 p-2 text-white shadow-[0_16px_40px_rgba(0,0,0,0.5)] backdrop-blur-lg border border-white/15">
-        {/* Quick WhatsApp Concierge Button */}
+      <div className="pointer-events-auto mx-auto flex max-w-sm items-center justify-between gap-3 rounded-full bg-[#1a0f2e]/92 p-2 text-white shadow-[0_16px_40px_rgba(10,5,20,0.55)] backdrop-blur-lg border border-[var(--color-gold)]/25">
         <a
           href={clinic.whatsappHref}
           target="_blank"
@@ -38,10 +37,9 @@ export function MobileCta() {
           <MessageCircle className="size-5" />
         </a>
 
-        {/* Primary Booking Pill Action */}
         <a
           href="#visit"
-          className="flex flex-1 items-center justify-center gap-2 rounded-full bg-[var(--color-bronze)] px-5 py-3 font-mono text-[0.6875rem] uppercase tracking-widest font-semibold text-[#081411] shadow-md transition-transform active:scale-95"
+          className="flex flex-1 min-h-11 items-center justify-center gap-2 rounded-full bg-[var(--color-gold)] px-5 py-3 font-mono text-[0.6875rem] uppercase tracking-widest font-semibold text-[#1a0f2e] shadow-md transition-transform active:scale-95"
         >
           <Sparkles className="size-3.5" />
           <span>Reserve Consultation</span>

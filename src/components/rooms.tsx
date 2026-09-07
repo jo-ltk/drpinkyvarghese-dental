@@ -50,17 +50,17 @@ export function Rooms() {
               Nº05 — Spatial Architecture
             </span>
             <h2 className="mt-4 font-display text-4xl leading-[1.05] font-light md:text-5xl lg:text-6xl text-current">
-              Sanctuary of calm,
+              Spaces of calm,
               <br />
-              <em className="italic text-[var(--color-bronze)]">
-                engineered for stillness.
+              <em className="italic text-[var(--color-gold)]">
+                composed for confidence.
               </em>
             </h2>
           </div>
           <p className="max-w-md text-xs sm:text-sm leading-relaxed text-current opacity-65 font-mono">
-            Every room at Dr. Pinky Varghese Dental Clinic was conceived to
-            quiet autonomic nervous system reactions through acoustic dampening,
-            organic materials, and diffuse natural daylight.
+            Every room at Dr. Pinky Varghese&apos;s practice is composed for
+            quiet focus — soft light, considered materials, and a pace that
+            puts patients at ease.
           </p>
         </div>
 
@@ -91,7 +91,7 @@ export function Rooms() {
 
               <figcaption className="mt-4 flex items-center justify-between font-mono text-[0.6875rem] uppercase tracking-wider text-current opacity-55 transition-opacity group-hover:opacity-90">
                 <span>{item.caption}</span>
-                <span className="text-[var(--color-bronze)]">Space 0{index + 1}</span>
+                <span className="text-[var(--color-gold)]">Space 0{index + 1}</span>
               </figcaption>
             </figure>
           ))}

@@ -1,48 +1,61 @@
 @import "tailwindcss";
 
 /*
-  Pingy Dental Clinic global palette —
-  Inspired by high-end private architectural medical ateliers.
-  Deep botanical obsidian pine + warm porcelain travertine ivory + burnished bronze.
+  Dr. Pinky Varghese — brand system
+  Deep plum purple + champagne gold + ivory / white.
+  Purple = brand depth · Ivory = breath · White = clarity · Gold = restrained accent.
 */
 @theme {
-  /* Primary surfaces */
-  --color-paper: #f4f0e8; /* warm porcelain alabaster / travertine */
-  --color-ink: #081411; /* deepest surgical botanical pine */
-  --color-botanical: #0d1e19; /* dark secondary pine */
-  --color-surface: #142a24; /* muted deep green surface */
+  /* Surfaces */
+  --color-paper: #f7f3eb; /* ivory */
+  --color-white: #ffffff;
+  --color-ink: #1a0f2e; /* deepest plum */
+  --color-plum: #241538; /* rich dark plum */
+  --color-violet: #3a2458; /* deep luxurious purple */
+  --color-surface: #2f1c4a; /* muted violet surface */
+  --color-lavender: #9a8bb5; /* soft lavender (muted UI) */
 
-  /* Neutrals */
-  --color-stone: #9ea39e; /* warm titanium / stone */
-  --color-sage: #58756a; /* surgical sage */
-  --color-charcoal: #121614; /* deep obsidian charcoal for text on light */
+  /* Neutrals on light */
+  --color-stone: #9a93a3;
+  --color-charcoal: #1a0f2e;
 
-  /* Accents */
-  --color-bronze: #b6905a; /* burnished bronze / warm gold */
-  --color-earth: #7a6348; /* deeper earthen tone */
-  --color-clay: #c9ab80; /* soft warm porcelain clay */
-  --color-accent: #b6905a; /* signature metallic accent */
+  /* Champagne gold accent family */
+  --color-gold: #c9a96e;
+  --color-gold-light: #dfc49a;
+  --color-gold-deep: #a8894e;
+  --color-bronze: #c9a96e; /* legacy alias → champagne gold */
+  --color-bronze-light: #dfc49a;
+  --color-accent: #c9a96e;
 
-  --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
-  --font-editorial: var(--font-bodoni), var(--font-fraunces), ui-serif, Georgia, serif;
-  --font-sans: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  /* Brand / CTA tokens used by UI primitives */
+  --color-brand: #c9a96e;
+  --color-brand-hover: #dfc49a;
+  --color-on-brand: #1a0f2e;
+  --color-ring: #c9a96e;
+
+  --font-display: var(--font-cormorant), "Cormorant Garamond", ui-serif, Georgia, serif;
+  --font-editorial: var(--font-cormorant), "Cormorant Garamond", ui-serif, Georgia, serif;
+  --font-sans: var(--font-manrope), Manrope, ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-mono), ui-monospace, "Cascadia Mono", monospace;
 }
 
-/* Live theme channel — GSAP ScrollTrigger morphs --bg/--fg as you scroll between worlds */
+/* Live theme channel — GSAP ScrollTrigger morphs --bg/--fg between worlds */
 @theme inline {
   --color-bg: var(--bg);
   --color-fg: var(--fg);
 }
 
-/* First paint matches the hero (ink / deep botanical pine) before ScrollTrigger settles */
+/* First paint matches the hero (deep plum) before ScrollTrigger settles */
 :root {
-  --bg: #081411;
-  --fg: #f4f0e8;
-  --color-bronze: #b6905a;
-  --color-bronze-light: #c9ab80;
-  --color-line: rgba(18, 22, 20, 0.12);
-  --color-line-dark: rgba(244, 240, 232, 0.14);
+  --bg: #1a0f2e;
+  --fg: #f7f3eb;
+  --color-bronze: #c9a96e;
+  --color-bronze-light: #dfc49a;
+  --color-gold: #c9a96e;
+  --color-gold-light: #dfc49a;
+  --color-line: rgba(26, 15, 46, 0.12);
+  --color-line-dark: rgba(247, 243, 235, 0.14);
+  --gold-glow: color-mix(in oklab, #c9a96e 28%, transparent);
 }
 
 html {
@@ -64,8 +77,8 @@ body {
 }
 
 ::selection {
-  background: var(--color-bronze);
-  color: #081411;
+  background: var(--color-gold);
+  color: #1a0f2e;
 }
 
 /* ---------- typography & utility primitives ---------- */
@@ -85,6 +98,27 @@ body {
   text-transform: uppercase;
 }
 
+/* Soft champagne wash — use sparingly on dark surfaces */
+.gold-wash {
+  background: linear-gradient(
+    135deg,
+    color-mix(in oklab, var(--color-gold) 18%, transparent) 0%,
+    transparent 55%
+  );
+}
+
+/* Hairline gold rule */
+.gold-rule {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    color-mix(in oklab, var(--color-gold) 75%, transparent) 35%,
+    color-mix(in oklab, var(--color-gold) 75%, transparent) 65%,
+    transparent 100%
+  );
+}
+
 /* Marquee track */
 @keyframes marquee {
   to {
@@ -102,10 +136,10 @@ body {
   }
 }
 
-/* Pulsing status ring */
+/* Pulsing status ring — champagne gold */
 @keyframes dot-pulse {
   0% {
-    box-shadow: 0 0 0 0 color-mix(in oklab, var(--color-bronze) 45%, transparent);
+    box-shadow: 0 0 0 0 color-mix(in oklab, var(--color-gold) 45%, transparent);
   }
   70% {
     box-shadow: 0 0 0 10px transparent;
@@ -119,13 +153,25 @@ body {
   animation: dot-pulse 2.4s cubic-bezier(0.22, 1, 0.36, 1) infinite;
 }
 
-/* Editorial image treatment */
+/* Editorial image treatment — slightly cooler violet cast */
 .img-tone {
-  filter: contrast(1.03) saturate(0.94);
+  filter: contrast(1.04) saturate(0.92);
+}
+
+.img-tone-violet {
+  filter: contrast(1.05) saturate(0.88) hue-rotate(-6deg);
 }
 
 /* Outline monumental type */
 .text-outline {
-  -webkit-text-stroke: 1px color-mix(in oklab, var(--fg) 50%, transparent);
+  -webkit-text-stroke: 1px color-mix(in oklab, var(--fg) 45%, transparent);
   color: transparent;
+}
+
+/* Gold ornamental stroke draw helper (SVG pathLength animations) */
+.gold-stroke {
+  stroke: var(--color-gold);
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
