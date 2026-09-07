@@ -11,14 +11,14 @@ const LINK_GROUPS = [
   {
     title: "Clinical Index",
     links: [
-      { label: "Biomimetic Diagnostics", href: "#treatments" },
-      { label: "Ceramic Inlays & Veneers", href: "#treatments" },
-      { label: "Airway Orthodontics", href: "#treatments" },
-      { label: "Sensory Prophylaxis", href: "#treatments" },
+      { label: "Implant Consultation", href: "#treatments" },
+      { label: "Smile Design Dialogue", href: "#treatments" },
+      { label: "Ceramic Restorations", href: "#treatments" },
+      { label: "Gentle Preventive Care", href: "#treatments" },
     ],
   },
   {
-    title: "The Atelier",
+    title: "The Practice",
     links: [
       { label: "Manifesto", href: "#manifesto" },
       { label: "Anatomy Study", href: "#anatomy" },

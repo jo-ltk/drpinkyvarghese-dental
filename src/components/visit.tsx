@@ -183,7 +183,7 @@ export function Visit() {
 
           {/* Right Column: Reservation Request Desk */}
           <div className="lg:col-span-7">
-            <div className="rounded-3xl border border-current/15 bg-current/5 p-6 sm:p-10 shadow-2xl backdrop-blur-md">
+            <div className="rounded-3xl border border-[var(--color-gold)]/25 bg-white p-6 sm:p-10 shadow-[0_24px_60px_rgba(26,15,46,0.08)]">
               {submitted ? (
                 <div className="py-10 text-center">
                   <div className="mx-auto flex size-14 items-center justify-center rounded-full bg-[var(--color-gold)]/20 text-[var(--color-gold)] mb-5">
