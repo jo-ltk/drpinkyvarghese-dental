@@ -230,7 +230,7 @@ export function SiteHeader() {
               <a
                 href="#visit"
                 data-cursor="BOOK"
-                className="cta-gold inline-flex min-h-10 items-center gap-1.5 rounded-full px-3.5 py-2 font-sans text-[0.68rem] font-semibold tracking-[0.04em] transition-[filter,transform] duration-300 sm:min-h-11 sm:gap-2 sm:px-5 sm:text-[0.72rem]"
+                className="cta-gold inline-flex min-h-10 items-center gap-1.5 rounded-full px-3.5 py-2.5 font-sans text-[0.68rem] font-semibold tracking-[0.04em] shadow-[0_8px_20px_rgba(10,5,20,0.35)] transition-[filter,transform] duration-300 sm:min-h-11 sm:gap-2 sm:px-5 sm:text-[0.72rem]"
               >
                 <CalendarDays className="size-3.5 shrink-0" strokeWidth={1.75} />
                 <span className="sm:hidden">Book Now</span>
@@ -307,7 +307,7 @@ export function SiteHeader() {
           </nav>
         </div>
 
-        <div data-menu-item className="relative space-y-4 pt-6 font-mono text-xs">
+        <div data-menu-item className="relative space-y-4 border-t border-[var(--color-gold)]/15 pt-6 font-mono text-xs">
           <div className="flex items-center justify-between text-[#f7f3eb]/60">
             <span className="tracking-[0.18em] uppercase">Direct Concierge</span>
             <span className="text-[var(--color-gold)]">{clinic.phoneDisplay}</span>
@@ -329,6 +329,9 @@ export function SiteHeader() {
               <span>Book</span>
             </a>
           </div>
+          <p className="text-center font-mono text-[0.55rem] tracking-[0.16em] text-[#f7f3eb]/45 uppercase">
+            Consulting · {clinic.consultingAt.slice(0, 2).join(" · ")}
+          </p>
         </div>
       </div>
     </>
