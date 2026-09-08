@@ -33,9 +33,9 @@ const ORBIT: OrbitItem[] = [
     alt: "Biomimetic Ceramic Margin",
     desktop: { angle: 210, rx: 45, ry: 36, scale: 1 },
     // Mobile: park lower-right, clear of centered copy
-    mobile: { angle: 145, rx: 42, ry: 46, scale: 0.72 },
+    mobile: { angle: 140, rx: 46, ry: 50, scale: 0.74 },
     className:
-      "h-[min(26vw,8.5rem)] w-[min(26vw,8.5rem)] opacity-[0.55] sm:opacity-100 sm:h-[min(38vmin,22rem)] sm:w-[min(38vmin,22rem)] md:h-[min(46vmin,28rem)] md:w-[min(46vmin,28rem)] rounded-full overflow-hidden border border-current/20 shadow-2xl",
+      "h-[min(30vw,9.5rem)] w-[min(30vw,9.5rem)] opacity-70 sm:opacity-100 sm:h-[min(38vmin,22rem)] sm:w-[min(38vmin,22rem)] md:h-[min(46vmin,28rem)] md:w-[min(46vmin,28rem)] rounded-full overflow-hidden border border-current/20 shadow-2xl",
   },
   {
     id: "photo-microscopy",
@@ -44,25 +44,25 @@ const ORBIT: OrbitItem[] = [
     alt: "High magnification diagnostic scan",
     desktop: { angle: 30, rx: 44, ry: 35, scale: 1 },
     // Mobile: park upper-left, clear of centered copy
-    mobile: { angle: 315, rx: 40, ry: 44, scale: 0.68 },
+    mobile: { angle: 320, rx: 46, ry: 48, scale: 0.7 },
     className:
-      "h-[min(22vw,7rem)] w-[min(22vw,7rem)] opacity-[0.5] sm:opacity-100 sm:h-[min(32vmin,18rem)] sm:w-[min(32vmin,18rem)] md:h-[min(40vmin,24rem)] md:w-[min(40vmin,24rem)] rounded-full overflow-hidden border border-current/20 shadow-2xl",
+      "h-[min(24vw,7.75rem)] w-[min(24vw,7.75rem)] opacity-65 sm:opacity-100 sm:h-[min(32vmin,18rem)] sm:w-[min(32vmin,18rem)] md:h-[min(40vmin,24rem)] md:w-[min(40vmin,24rem)] rounded-full overflow-hidden border border-current/20 shadow-2xl",
   },
   {
     id: "disc-plum",
     kind: "disc",
     desktop: { angle: 290, rx: 42, ry: 40, scale: 1 },
-    mobile: { angle: 250, rx: 46, ry: 48, scale: 0.7 },
+    mobile: { angle: 250, rx: 48, ry: 50, scale: 0.72 },
     className:
-      "size-[min(9vw,2.75rem)] sm:size-[min(12vmin,6rem)] rounded-full bg-[radial-gradient(circle_at_35%_30%,#4a2f6e_0%,#2b1a45_60%,#1a0f2e_100%)] shadow-lg border border-[var(--color-gold)]/20 md:size-[min(15vmin,8rem)]",
+      "size-[min(10vw,3rem)] sm:size-[min(12vmin,6rem)] rounded-full bg-[radial-gradient(circle_at_35%_30%,#4a2f6e_0%,#2b1a45_60%,#1a0f2e_100%)] shadow-lg border border-[var(--color-gold)]/20 md:size-[min(15vmin,8rem)]",
   },
   {
     id: "orb-gold",
     kind: "orb",
     desktop: { angle: 110, rx: 38, ry: 38, scale: 1 },
-    mobile: { angle: 40, rx: 44, ry: 42, scale: 0.75 },
+    mobile: { angle: 35, rx: 46, ry: 44, scale: 0.78 },
     className:
-      "size-[min(5vw,1.5rem)] sm:size-[min(6vmin,3.2rem)] rounded-full bg-[radial-gradient(circle_at_30%_30%,#dfc49a_0%,#c9a96e_55%,#8f7340_100%)] shadow-md md:size-[min(8vmin,4.5rem)]",
+      "size-[min(5.5vw,1.65rem)] sm:size-[min(6vmin,3.2rem)] rounded-full bg-[radial-gradient(circle_at_30%_30%,#dfc49a_0%,#c9a96e_55%,#8f7340_100%)] shadow-md md:size-[min(8vmin,4.5rem)]",
   },
   {
     id: "pill-ivory",
@@ -138,7 +138,7 @@ export function AnatomyStudy() {
           const cy = rect.height / 2;
           const turn = progress * Math.PI * 1.5;
           // Mobile: shorter arc so items stay near edges, not through copy
-          const turnScale = mobileMq.matches ? 0.55 : 1;
+          const turnScale = mobileMq.matches ? 0.4 : 1;
           const appliedTurn = turn * turnScale;
 
           itemEls.forEach(({ el, cfg }) => {
