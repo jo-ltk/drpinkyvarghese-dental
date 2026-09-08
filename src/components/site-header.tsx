@@ -201,7 +201,7 @@ export function SiteHeader() {
             className={cn(
               "flex items-center justify-between gap-3 rounded-full px-3.5 py-2.5 transition-all duration-500 sm:px-5 sm:py-3",
               scrolled || menuOpen
-                ? "border border-[var(--color-gold)]/20 bg-[#1a0f2e]/78 text-[#f7f3eb] shadow-[0_16px_40px_rgba(10,5,20,0.4)] backdrop-blur-md"
+                ? "border border-[var(--color-gold)]/20 bg-[#0c0c0c]/88 text-[#f7f3eb] shadow-[0_16px_40px_rgba(10,5,20,0.45)] backdrop-blur-md"
                 : "border border-transparent bg-transparent text-[#f7f3eb]",
             )}
           >
@@ -253,7 +253,7 @@ export function SiteHeader() {
                 ref={burgerRef}
                 type="button"
                 className={cn(
-                  "relative flex size-11 cursor-pointer items-center justify-center rounded-full border border-[var(--color-gold)]/30 bg-[#1a0f2e]/35 text-current transition-transform active:scale-95",
+                  "relative flex size-11 cursor-pointer items-center justify-center rounded-full border border-[var(--color-gold)]/30 bg-[#0c0c0c]/40 text-current transition-transform active:scale-95",
                   menuOpen ? "" : "lg:hidden",
                 )}
                 aria-expanded={menuOpen}
@@ -284,7 +284,7 @@ export function SiteHeader() {
       <div
         ref={menuRef}
         id="mobile-menu"
-        className="fixed inset-0 z-40 flex flex-col justify-between bg-[#1a0f2e] px-6 pt-24 pb-10 text-[#f7f3eb] opacity-0"
+        className="fixed inset-0 z-40 flex flex-col justify-between bg-[#0c0c0c] px-6 pt-24 pb-10 text-[#f7f3eb] opacity-0"
         style={{ clipPath: "inset(0 0 100% 0)", pointerEvents: "none" }}
         aria-hidden={!menuOpen}
       >

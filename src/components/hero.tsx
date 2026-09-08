@@ -2,21 +2,39 @@
 
 import { useRef } from "react";
 import Image from "next/image";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, Menu } from "lucide-react";
 import { clinic } from "@/content/clinic";
+import { cn } from "@/lib/utils";
 import { gsap, useGSAP, EASE_GSAP, prefersReducedMotion } from "@/lib/motion";
 
 function openSiteMenu() {
   window.dispatchEvent(new Event("open-site-menu"));
 }
 
-function BrandMark({ className }: { className?: string }) {
+function BrandMark({
+  className,
+  tone = "light",
+}: {
+  className?: string;
+  tone?: "light" | "dark";
+}) {
+  const onDark = tone === "dark";
   return (
     <a href="#top" className={className}>
-      <span className="block text-[0.95rem] font-extrabold tracking-[0.04em] text-black uppercase sm:text-[1.05rem]">
+      <span
+        className={cn(
+          "block text-[0.95rem] font-extrabold tracking-[0.04em] uppercase sm:text-[1.05rem]",
+          onDark ? "text-white" : "text-black",
+        )}
+      >
         Dr Pinky
       </span>
-      <span className="mt-0.5 block text-[0.62rem] font-normal tracking-[0.01em] text-black/70 sm:text-[0.7rem]">
+      <span
+        className={cn(
+          "mt-0.5 block text-[0.62rem] font-normal tracking-[0.01em] sm:text-[0.7rem]",
+          onDark ? "text-white/65" : "text-black/70",
+        )}
+      >
         quality healthcare.
       </span>
     </a>
@@ -72,21 +90,31 @@ export function Hero() {
       className="relative bg-[#0c0c0c] px-2 pt-2 pb-3 text-black sm:px-3 sm:pt-3 sm:pb-4 md:px-4"
     >
       {/* ——— MOBILE ——— */}
-      <div className="font-hero relative isolate flex min-h-[calc(100svh-0.5rem)] flex-col overflow-hidden rounded-[1.75rem] bg-white md:hidden">
+      <div className="font-hero relative isolate flex min-h-[calc(100svh-0.5rem)] flex-col overflow-hidden rounded-[1.75rem] bg-[#0c0c0c] md:hidden">
         <header
           data-hero-nav
-          className="relative z-20 flex items-start justify-between gap-3 border-b border-black/10 bg-white px-5 py-3.5"
+          className="relative z-20 flex items-center justify-between gap-3 border-b border-white/10 bg-[#0c0c0c] px-5 py-3.5"
         >
-          <BrandMark className="leading-none" />
-          <a
-            href={clinic.phoneHref}
-            className="pt-1 text-right text-[0.8rem] font-medium text-black"
-          >
-            Dental Emergency
-          </a>
+          <BrandMark tone="dark" className="leading-none" />
+          <div className="flex items-center gap-2.5">
+            <a
+              href={clinic.phoneHref}
+              className="text-right text-[0.8rem] font-medium text-white"
+            >
+              Dental Emergency
+            </a>
+            <button
+              type="button"
+              onClick={openSiteMenu}
+              aria-label="Open menu"
+              className="flex size-10 shrink-0 items-center justify-center rounded-full border border-white/25 bg-white/8 text-white transition-colors hover:bg-white/15 active:scale-95"
+            >
+              <Menu className="size-4" strokeWidth={1.75} />
+            </button>
+          </div>
         </header>
 
-        <div className="relative min-h-0 flex-1">
+        <div className="relative min-h-0 flex-1 overflow-hidden rounded-b-[1.75rem]">
           <div data-hero-photo className="absolute inset-0">
             <Image
               src="/hero-portrait-mobile.png"
@@ -98,18 +126,10 @@ export function Hero() {
             />
           </div>
 
-          <div className="relative z-10 flex h-full min-h-[calc(100svh-4.25rem)] flex-col px-5 pt-4 pb-6 text-white">
-            <button
-              type="button"
-              onClick={openSiteMenu}
-              className="w-full rounded-full border border-white/85 bg-white/12 py-2.5 text-center text-[0.95rem] font-medium text-white backdrop-blur-md transition-colors hover:bg-white/20"
-            >
-              Menu
-            </button>
-
+          <div className="relative z-10 flex h-full min-h-[calc(100svh-4.25rem)] flex-col px-5 pt-5 pb-6 text-white">
             <p
               data-hero-copy
-              className="mx-auto mt-[22vh] max-w-[16.5rem] text-center text-[0.82rem] leading-[1.55] font-medium text-white"
+              className="mx-auto mt-[18vh] max-w-[16.5rem] text-center text-[0.82rem] leading-[1.55] font-medium text-white"
             >
               We wish to provide professional dental services that match the
               current technologies
