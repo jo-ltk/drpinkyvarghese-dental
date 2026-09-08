@@ -1,0 +1,27 @@
+---
+description: Always-on design craft from Emil Kowalski, Taste Skill, and Impeccable. Applies to every chat.
+alwaysApply: true
+---
+
+# Always follow Vocabulary craft skills
+
+On **every** conversation (including a brand-new chat), treat the installed Vocabulary stack as required guidance for any UI, frontend, visual, motion, landing-page, redesign, critique, or polish work.
+
+## Required skills (read when relevant; do not wait to be asked)
+
+1. `.cursor/skills/vocabulary/SKILL.md` — master router (start here)
+2. `.cursor/skills/taste-skill/SKILL.md` — anti-slop brief inference, dials, AI-tell bans, pre-flight
+3. `.cursor/skills/emil-design-eng/SKILL.md` — design engineering + motion decision framework
+4. `.cursor/skills/animation-vocabulary/SKILL.md` — precise motion naming when describing or building animation
+5. `.cursor/skills/impeccable/SKILL.md` + `reference/craft-floor.md` — craft floor and design-director workflow
+
+Upstream sources: https://emilkowal.ski/skill · https://github.com/leonxlnx/taste-skill · https://github.com/pbakaus/impeccable
+
+## Hard habits
+
+- State a one-line Design Read before generating UI when the surface is new or ambiguous.
+- Avoid LLM design defaults (AI purple, Inter-by-default, three equal feature cards, cream+terracotta premium cliché, em-dash clutter, fake div “screenshots”, scroll-cue labels).
+- Animate only with purpose; use Emil easing/duration rules; name effects with animation vocabulary.
+- Before shipping UI edits, satisfy Impeccable craft-floor Verify checks and Taste Skill pre-flight.
+
+If a request is backend-only with no UI, do not force a design pass — but keep this stack ready for the next UI turn in the same chat.
