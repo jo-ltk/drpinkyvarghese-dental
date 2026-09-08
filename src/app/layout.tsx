@@ -4,6 +4,7 @@ import {
   Manrope,
   IBM_Plex_Mono,
   Great_Vibes,
+  Inter,
 } from "next/font/google";
 
 import "./globals.css";
@@ -36,6 +37,13 @@ const greatVibes = Great_Vibes({
   display: "swap",
 });
 
+const inter = Inter({
+  variable: "--font-inter",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800", "900"],
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   title: "Dr. Pinky Varghese — Implantology & Smile Design, Kochi",
   description:
@@ -50,7 +58,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${cormorant.variable} ${manrope.variable} ${ibmPlexMono.variable} ${greatVibes.variable} h-full antialiased`}
+      className={`${cormorant.variable} ${manrope.variable} ${ibmPlexMono.variable} ${greatVibes.variable} ${inter.variable} h-full antialiased`}
     >
       <body className="min-h-full font-sans antialiased selection:bg-[#c9a96e] selection:text-[#1a0f2e]">
         {children}

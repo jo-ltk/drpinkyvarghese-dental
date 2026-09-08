@@ -7,6 +7,7 @@ import { clinic } from "@/content/clinic";
 export function MobileCta() {
   const [hidden, setHidden] = useState(false);
   const [showLocations, setShowLocations] = useState(false);
+  const [pastHero, setPastHero] = useState(false);
 
   useEffect(() => {
     const visit = document.getElementById("visit");
@@ -25,14 +26,15 @@ export function MobileCta() {
 
   useEffect(() => {
     const onScroll = () => {
-      setShowLocations(window.scrollY > window.innerHeight * 0.55);
+      setShowLocations(window.scrollY > window.innerHeight * 0.85);
+      setPastHero(window.scrollY > window.innerHeight * 0.72);
     };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  if (hidden) return null;
+  if (hidden || !pastHero) return null;
 
   return (
     <div className="pointer-events-none fixed inset-x-0 bottom-0 z-40 px-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] md:hidden">

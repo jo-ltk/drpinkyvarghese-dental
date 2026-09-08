@@ -1,133 +1,26 @@
 "use client";
 
-import { useRef, type ReactNode } from "react";
-import { ArrowRight, CalendarDays, Play } from "lucide-react";
-import {
-  gsap,
-  useGSAP,
-  EASE_GSAP,
-  prefersReducedMotion,
-} from "@/lib/motion";
-import {
-  clinic,
-  HERO_FIGURES,
-  HERO_FIGURES_MOBILE,
-  SERVICE_PILLARS,
-} from "@/content/clinic";
-import { SectionWave } from "@/components/section-wave";
-import { cn } from "@/lib/utils";
+import { useRef } from "react";
+import Image from "next/image";
+import { ChevronDown } from "lucide-react";
+import { clinic } from "@/content/clinic";
+import { gsap, useGSAP, EASE_GSAP, prefersReducedMotion } from "@/lib/motion";
 
-function MaskLine({
-  children,
-  className,
-}: {
-  children: ReactNode;
-  className?: string;
-}) {
+function openSiteMenu() {
+  window.dispatchEvent(new Event("open-site-menu"));
+}
+
+function BrandMark({ className }: { className?: string }) {
   return (
-    <span className={cn("block overflow-hidden pb-[0.05em]", className)}>
-      <span data-hero-line className="block will-change-transform">
-        {children}
+    <a href="#top" className={className}>
+      <span className="block text-[0.95rem] font-extrabold tracking-[0.04em] text-black uppercase sm:text-[1.05rem]">
+        Dr Pinky
       </span>
-    </span>
+      <span className="mt-0.5 block text-[0.62rem] font-normal tracking-[0.01em] text-black/70 sm:text-[0.7rem]">
+        quality healthcare.
+      </span>
+    </a>
   );
-}
-
-function ToothWatermark({ className }: { className?: string }) {
-  return (
-    <svg
-      data-hero-tooth
-      aria-hidden
-      viewBox="0 0 200 260"
-      className={cn("pointer-events-none text-white", className)}
-    >
-      <defs>
-        <radialGradient id="toothGlow" cx="50%" cy="40%" r="60%">
-          <stop offset="0%" stopColor="rgba(180,140,220,0.55)" />
-          <stop offset="70%" stopColor="rgba(90,50,140,0.2)" />
-          <stop offset="100%" stopColor="rgba(40,20,70,0)" />
-        </radialGradient>
-      </defs>
-      <path
-        fill="url(#toothGlow)"
-        d="M100 18c-28 0-50 18-58 46-6 22-2 42 8 62 8 16 14 34 12 54-2 18 2 36 12 48 8 10 20 14 28 8 6-4 8-14 6-28-2-18 2-34 10-46 8 12 12 28 10 46-2 14 0 24 6 28 8 6 20 2 28-8 10-12 14-30 12-48-2-20 4-38 12-54 10-20 14-40 8-62C150 36 128 18 100 18z"
-      />
-    </svg>
-  );
-}
-
-function GoldArc({ className }: { className?: string }) {
-  return (
-    <svg
-      data-hero-ornament
-      aria-hidden
-      viewBox="0 0 360 120"
-      fill="none"
-      className={cn("pointer-events-none text-[var(--color-gold)]", className)}
-    >
-      <path
-        data-gold-path
-        className="gold-stroke"
-        stroke="currentColor"
-        strokeWidth="1.25"
-        opacity="0.8"
-        pathLength={1}
-        d="M12 88 C 70 18, 140 8, 190 48 C 240 88, 290 28, 348 62"
-      />
-      <circle
-        data-gold-dot
-        cx="190"
-        cy="48"
-        r="2.5"
-        fill="currentColor"
-        opacity="0.95"
-      />
-    </svg>
-  );
-}
-
-function PillarIcon({ type }: { type: (typeof SERVICE_PILLARS)[number]["icon"] }) {
-  const common = {
-    fill: "none",
-    stroke: "currentColor",
-    strokeWidth: 1.35,
-    strokeLinecap: "round" as const,
-    strokeLinejoin: "round" as const,
-  };
-
-  switch (type) {
-    case "implant":
-      return (
-        <svg viewBox="0 0 32 32" className="size-7" aria-hidden>
-          <path {...common} d="M16 4v8M12 8h8" />
-          <path {...common} d="M13 12c0 8 1.5 14 3 16 1.5-2 3-8 3-16" />
-          <path {...common} d="M11 14h10" />
-        </svg>
-      );
-    case "smile":
-      return (
-        <svg viewBox="0 0 32 32" className="size-7" aria-hidden>
-          <path {...common} d="M8 14c2 6 14 6 16 0" />
-          <circle {...common} cx="11" cy="11" r="1.2" fill="currentColor" />
-          <circle {...common} cx="21" cy="11" r="1.2" fill="currentColor" />
-          <rect {...common} x="7" y="8" width="18" height="14" rx="4" />
-        </svg>
-      );
-    case "tech":
-      return (
-        <svg viewBox="0 0 32 32" className="size-7" aria-hidden>
-          <circle {...common} cx="16" cy="16" r="5" />
-          <path {...common} d="M16 5v3M16 24v3M5 16h3M24 16h3M8 8l2 2M22 22l2 2M8 24l2-2M22 10l2-2" />
-        </svg>
-      );
-    default:
-      return (
-        <svg viewBox="0 0 32 32" className="size-7" aria-hidden>
-          <path {...common} d="M16 6c-4 0-7 3-7 7 0 6 7 13 7 13s7-7 7-13c0-4-3-7-7-7z" />
-          <circle {...common} cx="16" cy="13" r="2.5" />
-        </svg>
-      );
-  }
 }
 
 export function Hero() {
@@ -135,174 +28,38 @@ export function Hero() {
 
   useGSAP(
     () => {
-      if (prefersReducedMotion()) {
-        gsap.set("[data-gold-path]", { strokeDasharray: 1, strokeDashoffset: 0 });
-        return;
-      }
+      if (prefersReducedMotion()) return;
 
       const ease = gsap.parseEase(`cubic-bezier(${EASE_GSAP.join(",")})`);
-      const mm = gsap.matchMedia();
+      const q = gsap.utils.selector(root.current);
 
-      const runEntrance = (scopeSel: string) => {
-        const q = gsap.utils.selector(root.current);
-        const within = (sel: string) => q(`${scopeSel} ${sel}`);
-
-        gsap.set(within("[data-gold-path]"), {
-          strokeDasharray: 1,
-          strokeDashoffset: 1,
-        });
-        gsap.set(within("[data-gold-dot]"), {
-          scale: 0,
-          transformOrigin: "50% 50%",
-        });
-
-        const tl = gsap.timeline({ defaults: { ease } });
-
-        tl.from(q("[data-hero-atmosphere]"), {
+      gsap
+        .timeline({ defaults: { ease } })
+        .from(q("[data-hero-photo]"), {
           autoAlpha: 0,
-          scale: 1.04,
-          duration: 1.35,
+          scale: 1.06,
+          duration: 1.15,
         })
-          .from(
-            q("[data-hero-tooth]"),
-            { autoAlpha: 0, scale: 0.86, duration: 1.2 },
-            0.15,
-          )
-          .from(
-            within("[data-hero-portrait]"),
-            {
-              xPercent: 14,
-              autoAlpha: 0,
-              scale: 1.05,
-              duration: 1.3,
-              transformOrigin: "85% 60%",
-            },
-            0.22,
-          )
-          .from(
-            within("[data-hero-eyebrow]"),
-            { y: 12, autoAlpha: 0, duration: 0.5 },
-            0.42,
-          )
-          .from(
-            within("[data-hero-line]"),
-            { yPercent: 115, duration: 0.95, stagger: 0.1 },
-            0.5,
-          )
-          .from(
-            within("[data-hero-signature]"),
-            { autoAlpha: 0, y: 10, duration: 0.5 },
-            0.85,
-          )
-          .from(
-            within("[data-hero-support]"),
-            { y: 10, autoAlpha: 0, duration: 0.45 },
-            0.95,
-          )
-          .from(
-            within("[data-hero-cta]"),
-            { y: 16, autoAlpha: 0, duration: 0.55 },
-            1.05,
-          )
-          .from(
-            within("[data-hero-secondary]"),
-            { autoAlpha: 0, duration: 0.4 },
-            1.18,
-          )
-          .to(
-            within("[data-gold-path]"),
-            { strokeDashoffset: 0, duration: 1.15 },
-            0.65,
-          )
-          .to(within("[data-gold-dot]"), { scale: 1, duration: 0.35 }, 1.1)
-          .from(
-            q("[data-hero-pillars]"),
-            { y: 22, autoAlpha: 0, duration: 0.65 },
-            1.2,
-          );
-
-        return tl;
-      };
-
-      mm.add("(max-width: 767px)", () => {
-        runEntrance("[data-hero-mobile]");
-
-        gsap.to("[data-hero-mobile] [data-hero-portrait]", {
-          yPercent: -6,
-          scale: 1.03,
-          ease: "none",
-          scrollTrigger: {
-            trigger: root.current,
-            start: "top top",
-            end: "bottom top",
-            scrub: 0.7,
-          },
-        });
-
-        gsap.to("[data-hero-mobile] [data-hero-copy]", {
-          yPercent: -8,
-          autoAlpha: 0.5,
-          ease: "none",
-          scrollTrigger: {
-            trigger: root.current,
-            start: "top top",
-            end: "bottom top",
-            scrub: 0.55,
-          },
-        });
-
-        gsap.to("[data-hero-tooth]", {
-          yPercent: 10,
-          autoAlpha: 0.12,
-          ease: "none",
-          scrollTrigger: {
-            trigger: root.current,
-            start: "top top",
-            end: "bottom top",
-            scrub: true,
-          },
-        });
-      });
-
-      mm.add("(min-width: 768px)", () => {
-        runEntrance("[data-hero-desktop]");
-
-        gsap.to("[data-hero-desktop] [data-hero-portrait]", {
-          yPercent: -12,
-          scale: 1.05,
-          ease: "none",
-          scrollTrigger: {
-            trigger: root.current,
-            start: "top top",
-            end: "bottom top",
-            scrub: 0.85,
-          },
-        });
-
-        gsap.to("[data-hero-desktop] [data-hero-copy]", {
-          yPercent: -6,
-          autoAlpha: 0.55,
-          ease: "none",
-          scrollTrigger: {
-            trigger: root.current,
-            start: "35% top",
-            end: "bottom top",
-            scrub: true,
-          },
-        });
-
-        gsap.to("[data-hero-desktop] [data-hero-ornament]", {
-          yPercent: -20,
-          autoAlpha: 0.3,
-          ease: "none",
-          scrollTrigger: {
-            trigger: root.current,
-            start: "top top",
-            end: "bottom top",
-            scrub: true,
-          },
-        });
-      });
+        .from(
+          q("[data-hero-nav]"),
+          { y: -12, autoAlpha: 0, duration: 0.55 },
+          0.2,
+        )
+        .from(
+          q("[data-hero-copy]"),
+          { y: 16, autoAlpha: 0, duration: 0.55 },
+          0.35,
+        )
+        .from(
+          q("[data-hero-title]"),
+          { y: 24, autoAlpha: 0, duration: 0.7 },
+          0.55,
+        )
+        .from(
+          q("[data-hero-cta]"),
+          { y: 18, autoAlpha: 0, duration: 0.5 },
+          0.7,
+        );
     },
     { scope: root },
   );
@@ -312,117 +69,71 @@ export function Hero() {
       ref={root}
       id="top"
       data-theme="ink"
-      className="relative overflow-hidden bg-[#1a0f2e] text-[#f7f3eb]"
+      className="relative bg-[#0c0c0c] px-2 pt-2 pb-3 text-black sm:px-3 sm:pt-3 sm:pb-4 md:px-4"
     >
-      <div
-        data-hero-atmosphere
-        aria-hidden
-        className="hero-atmosphere absolute inset-0 z-0"
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 z-[1] opacity-[0.32] mix-blend-soft-light"
-        style={{
-          backgroundImage:
-            "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E\")",
-        }}
-      />
-
-      <ToothWatermark className="absolute top-[12%] right-[-18%] z-[1] h-[72%] w-auto opacity-45 md:right-[-2%] md:top-[8%] md:h-[78%] md:opacity-50" />
-
-      {/* ——— MOBILE: layered single-viewport stage ——— */}
-      <div data-hero-mobile className="relative z-[2] flex min-h-[100svh] flex-col md:hidden">
-        <div className="relative flex min-h-[100svh] flex-1 flex-col overflow-hidden pt-[4.6rem] pb-[5.5rem]">
-          {/* Portrait — right-anchored, overlaps copy */}
-          <div
-            data-hero-portrait
-            data-cursor="DOCTOR"
-            className="pointer-events-none absolute top-[22%] right-[-6%] bottom-0 z-[1] w-[68%] max-w-[17.5rem] origin-bottom will-change-transform"
+      {/* ——— MOBILE ——— */}
+      <div className="font-hero relative isolate flex min-h-[calc(100svh-0.5rem)] flex-col overflow-hidden rounded-[1.75rem] bg-white md:hidden">
+        <header
+          data-hero-nav
+          className="relative z-20 flex items-start justify-between gap-3 border-b border-black/10 bg-white px-5 py-3.5"
+        >
+          <BrandMark className="leading-none" />
+          <a
+            href={clinic.phoneHref}
+            className="pt-1 text-right text-[0.8rem] font-medium text-black"
           >
-            <div
-              aria-hidden
-              className="soft-glow-purple absolute top-[8%] right-[8%] h-[65%] w-[70%] blur-2xl"
-            />
-            <div className="relative h-full clip-portrait-fade">
-              <img
-                src={HERO_FIGURES_MOBILE}
-                alt={`${clinic.name}, ${clinic.role}`}
-                draggable={false}
-                className="img-tone-violet pointer-events-none h-full w-full object-cover object-[center_8%] select-none"
-              />
-            </div>
-            <div
-              aria-hidden
-              className="pointer-events-none absolute top-[6%] right-[10%] z-[2] h-[58%] w-[72%] rounded-[46%_54%_48%_52%/50%_40%_60%_50%] border border-[var(--color-gold)]/22"
+            Dental Emergency
+          </a>
+        </header>
+
+        <div className="relative min-h-0 flex-1">
+          <div data-hero-photo className="absolute inset-0">
+            <Image
+              src="/hero-portrait-mobile.png"
+              alt={`${clinic.name} — smile and dental care`}
+              fill
+              priority
+              sizes="100vw"
+              className="object-cover object-[center_22%]"
             />
           </div>
 
-          {/* Copy — left foreground */}
-          <div
-            data-hero-copy
-            className="relative z-[3] flex flex-1 flex-col justify-between px-5 pt-1 [text-shadow:0_2px_24px_rgba(26,15,46,0.55)]"
-          >
-            <div className="max-w-[15.5rem]">
-              <GoldArc className="mb-2.5 h-7 w-32 opacity-90" />
+          <div className="relative z-10 flex h-full min-h-[calc(100svh-4.25rem)] flex-col px-5 pt-4 pb-6 text-white">
+            <button
+              type="button"
+              onClick={openSiteMenu}
+              className="w-full rounded-full border border-white/85 bg-white/12 py-2.5 text-center text-[0.95rem] font-medium text-white backdrop-blur-md transition-colors hover:bg-white/20"
+            >
+              Menu
+            </button>
 
-              <p
-                data-hero-eyebrow
-                className="font-mono text-[0.55rem] tracking-[0.3em] text-[#f7f3eb]/68 uppercase"
-              >
-                {clinic.heroEyebrow}
-              </p>
+            <p
+              data-hero-copy
+              className="mx-auto mt-[22vh] max-w-[16.5rem] text-center text-[0.82rem] leading-[1.55] font-medium text-white"
+            >
+              We wish to provide professional dental services that match the
+              current technologies
+            </p>
 
-              <h1 className="mt-2.5 font-editorial text-[clamp(2.45rem,11.5vw,3.15rem)] leading-[0.9] font-light tracking-[-0.025em] text-[#f7f3eb]">
-                <MaskLine>{clinic.heroHeadline[0]}</MaskLine>
-                <MaskLine>
-                  A{" "}
-                  <span className="text-gold-accent italic">
-                    {clinic.heroAccentWord}
-                  </span>
-                </MaskLine>
-              </h1>
-
-              <div data-hero-signature className="mt-3.5">
-                <p className="font-script text-[1.45rem] leading-none text-[var(--color-gold-light)]">
-                  {clinic.name}
+            <div className="mt-auto flex items-end justify-between gap-3">
+              <div data-hero-title>
+                <p className="text-[0.78rem] font-medium text-white">
+                  Trusted Dentist in {clinic.location.replace(", Kerala", "")}
                 </p>
-                <p className="mt-1 font-mono text-[0.5rem] tracking-[0.22em] text-[var(--color-gold)]/80 uppercase">
-                  {clinic.role}
-                </p>
+                <h1 className="mt-1 text-[clamp(3.35rem,16vw,4.6rem)] leading-[0.86] font-extrabold tracking-[-0.04em] text-white">
+                  Dental
+                  <br />
+                  Care
+                </h1>
               </div>
-
-              <p
-                data-hero-support
-                className="mt-3 max-w-[12.5rem] text-[0.68rem] leading-relaxed tracking-[0.06em] text-[#f7f3eb]/68 uppercase"
-              >
-                {clinic.heroSupport}
-              </p>
-            </div>
-
-            <div className="mt-auto space-y-3.5 pb-2">
-              <a
-                href="#visit"
-                data-hero-cta
-                data-cursor="BOOK"
-                className="cta-gold pointer-events-auto inline-flex min-h-[3.15rem] w-full max-w-[17rem] items-center justify-center gap-2 rounded-full px-5 py-3 font-sans text-[0.8rem] font-semibold tracking-[0.05em] transition-[filter,transform] duration-300"
-              >
-                <CalendarDays className="size-4 shrink-0" strokeWidth={1.75} />
-                <span>Book Appointment</span>
-                <ArrowRight className="size-4 shrink-0 opacity-75" strokeWidth={1.75} />
-              </a>
 
               <a
                 href="#manifesto"
-                data-hero-secondary
-                data-cursor="STORY"
-                className="pointer-events-auto inline-flex items-center gap-2.5 text-[#f7f3eb]/78 transition-colors hover:text-[var(--color-gold)]"
+                data-hero-cta
+                aria-label="Scroll to next section"
+                className="mb-1 flex size-11 shrink-0 items-center justify-center rounded-full border border-white/90 text-white transition-transform active:scale-95"
               >
-                <span className="flex size-8 items-center justify-center rounded-full border border-[var(--color-gold)]/50 text-[var(--color-gold)]">
-                  <Play className="size-3 fill-current" strokeWidth={1.5} />
-                </span>
-                <span className="font-mono text-[0.55rem] tracking-[0.22em] uppercase">
-                  Our Story
-                </span>
+                <ChevronDown className="size-5" strokeWidth={1.75} />
               </a>
             </div>
           </div>
@@ -430,131 +141,80 @@ export function Hero() {
       </div>
 
       {/* ——— DESKTOP / TABLET ——— */}
-      <div
-        data-hero-desktop
-        className="relative z-[2] mx-auto hidden min-h-[100svh] max-w-7xl md:grid md:grid-cols-12 md:items-end md:gap-6 md:px-12 md:pt-[5.5rem] lg:gap-10 lg:px-16"
-      >
-        <div
-          data-hero-copy
-          className="relative z-[3] flex max-w-xl flex-col pb-20 md:col-span-6 lg:col-span-5 lg:pb-24"
-        >
-          <GoldArc className="mb-5 h-11 w-48 opacity-90" />
+      <div className="font-hero relative isolate hidden min-h-[calc(100svh-1.25rem)] overflow-hidden rounded-[2.25rem] bg-white md:block md:rounded-[2.75rem]">
+        <div data-hero-photo className="absolute inset-0 z-0">
+          <Image
+            src="/hero-portrait.png"
+            alt={`${clinic.name} — smile and dental care`}
+            fill
+            priority
+            sizes="100vw"
+            className="object-contain object-right"
+          />
+        </div>
 
-          <p
-            data-hero-eyebrow
-            className="font-mono text-[0.62rem] tracking-[0.32em] text-[#f7f3eb]/70 uppercase"
+        <div className="relative z-10 flex min-h-[calc(100svh-1.25rem)] flex-col px-8 pt-7 pb-8 md:px-10 lg:px-12">
+          <header
+            data-hero-nav
+            className="grid grid-cols-[1fr_auto_1fr] items-start gap-2"
           >
-            {clinic.heroEyebrow}
-          </p>
+            <BrandMark className="justify-self-start leading-none" />
 
-          <h1 className="mt-4 font-editorial text-[clamp(3.4rem,6vw,5.4rem)] leading-[0.92] font-light tracking-[-0.025em] text-[#f7f3eb]">
-            <MaskLine>{clinic.heroHeadline[0]}</MaskLine>
-            <MaskLine>
-              A{" "}
-              <span className="text-gold-accent italic">
-                {clinic.heroAccentWord}
-              </span>
-            </MaskLine>
-          </h1>
+            <button
+              type="button"
+              onClick={openSiteMenu}
+              className="justify-self-center rounded-full border border-black bg-white px-6 py-2 text-[0.85rem] font-medium text-black transition-colors hover:bg-black hover:text-white"
+            >
+              Menu
+            </button>
 
-          <div data-hero-signature className="mt-5">
-            <p className="font-script text-[2rem] leading-none text-[#f7f3eb]">
-              {clinic.name}
-            </p>
-            <p className="mt-1.5 font-mono text-[0.55rem] tracking-[0.24em] text-[var(--color-gold)]/85 uppercase">
-              {clinic.role}
-            </p>
-          </div>
-
-          <p
-            data-hero-support
-            className="mt-5 max-w-sm text-[0.82rem] leading-relaxed tracking-[0.04em] text-[#f7f3eb]/72 uppercase"
-          >
-            {clinic.heroSupport}
-          </p>
-
-          <div className="mt-10 flex flex-row items-center gap-6">
             <a
-              href="#visit"
+              href={clinic.phoneHref}
+              className="justify-self-end pt-1 text-right text-[0.9rem] font-medium text-black"
+            >
+              Dental Emergency
+            </a>
+          </header>
+
+          <p
+            data-hero-copy
+            className="absolute top-[46%] left-10 max-w-[15.5rem] text-[0.8rem] leading-relaxed text-black/80 lg:left-12"
+          >
+            We wish to provide professional dental services that match the
+            current technologies.
+          </p>
+
+          <div className="mt-auto flex items-end justify-between gap-6 pt-0">
+            <div data-hero-title className="max-w-xl">
+              <p className="text-[0.9rem] font-medium text-black">
+                Trusted Dentist in {clinic.location.replace(", Kerala", "")}.
+              </p>
+              <h1 className="mt-1 text-[clamp(3.4rem,10vw,8.25rem)] leading-[0.82] font-extrabold tracking-[-0.045em] text-black">
+                Dental
+                <br />
+                Care
+              </h1>
+            </div>
+
+            <div
               data-hero-cta
-              data-cursor="BOOK"
-              className="cta-gold pointer-events-auto inline-flex min-h-12 min-w-[14rem] items-center justify-center gap-2.5 rounded-full px-6 py-3.5 font-sans text-[0.78rem] font-semibold tracking-[0.06em] transition-[filter,transform] duration-300"
+              className="max-w-[16.5rem] self-end pb-1 text-right text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.25)]"
             >
-              <CalendarDays className="size-4 shrink-0" strokeWidth={1.75} />
-              <span>Book Appointment</span>
-              <ArrowRight className="size-4 shrink-0 opacity-80" strokeWidth={1.75} />
-            </a>
-
-            <a
-              href="#manifesto"
-              data-hero-secondary
-              data-cursor="STORY"
-              className="pointer-events-auto inline-flex items-center gap-3 text-[0.72rem] tracking-[0.08em] text-[#f7f3eb]/80 transition-colors hover:text-[var(--color-gold)]"
-            >
-              <span className="flex size-9 items-center justify-center rounded-full border border-[var(--color-gold)]/45 text-[var(--color-gold)]">
-                <Play className="size-3.5 fill-current" strokeWidth={1.5} />
-              </span>
-              <span className="font-mono text-[0.58rem] tracking-[0.22em] uppercase">
-                Our Story
-              </span>
-            </a>
-          </div>
-        </div>
-
-        <div className="relative z-[2] md:col-span-6 md:min-h-[72vh] lg:col-span-7">
-          <div
-            data-hero-portrait
-            data-cursor="DOCTOR"
-            className="absolute right-0 bottom-0 w-[min(100%,38rem)] origin-bottom will-change-transform"
-          >
-            <div
-              aria-hidden
-              className="soft-glow-purple absolute top-[10%] right-[5%] h-[70%] w-[70%] blur-2xl"
-            />
-            <div className="relative clip-portrait-fade">
-              <img
-                src={HERO_FIGURES}
-                alt={`${clinic.name}, ${clinic.role}`}
-                draggable={false}
-                className="img-tone-violet pointer-events-none relative z-[1] aspect-[3/4] max-h-[78vh] w-full object-cover object-[center_10%] select-none"
-              />
-            </div>
-            <div className="pointer-events-none absolute bottom-[18%] left-0 z-[2] max-w-[16rem] px-1">
-              <p className="font-script text-[1.6rem] leading-none text-[var(--color-gold-light)]">
-                {clinic.name}
+              <p className="text-[1.05rem] leading-snug font-medium">
+                We believe in the power of your smile
               </p>
-              <p className="mt-2 font-editorial text-[0.9rem] leading-snug text-[#f7f3eb]/75 italic">
-                “{clinic.heroQuote}”
+              <p className="mt-3 text-[0.8rem] font-medium text-white/95">
+                Free Consultation
               </p>
+              <a
+                href="#visit"
+                data-cursor="BOOK"
+                className="mt-3 inline-flex min-h-10 items-center justify-center rounded-full bg-white px-6 py-2.5 text-[0.85rem] font-bold text-black transition-transform hover:bg-white/92 active:scale-[0.98]"
+              >
+                Book Online
+              </a>
             </div>
-            <div
-              aria-hidden
-              className="pointer-events-none absolute top-[8%] right-[6%] z-[2] h-[62%] w-[78%] rounded-[42%_58%_48%_52%/48%_42%_58%_52%] border border-[var(--color-gold)]/25"
-            />
           </div>
-        </div>
-      </div>
-
-      <SectionWave variant="to-paper" className="relative z-[3]" />
-
-      <div
-        data-hero-pillars
-        className="relative z-[3] bg-[#f7f3eb] px-5 pt-2 pb-12 text-[#1a0f2e] sm:px-8 sm:pb-14 md:px-12 lg:px-16"
-      >
-        <div className="mx-auto grid max-w-5xl grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-4 sm:gap-6">
-          {SERVICE_PILLARS.map((pillar) => (
-            <div
-              key={pillar.id}
-              className="flex flex-col items-center gap-2.5 text-center"
-            >
-              <span className="flex size-12 items-center justify-center rounded-full border border-[var(--color-gold)]/35 text-[#3a2458]">
-                <PillarIcon type={pillar.icon} />
-              </span>
-              <span className="max-w-[7.5rem] text-[0.68rem] leading-snug font-medium tracking-[0.02em] text-[#2a1744] sm:text-[0.72rem]">
-                {pillar.label}
-              </span>
-            </div>
-          ))}
         </div>
       </div>
     </section>

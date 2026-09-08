@@ -38,6 +38,7 @@
   --font-script: var(--font-great-vibes), "Great Vibes", cursive;
   --font-sans: var(--font-manrope), Manrope, ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-mono), ui-monospace, "Cascadia Mono", monospace;
+  --font-hero: var(--font-inter), Inter, ui-sans-serif, system-ui, sans-serif;
 }
 
 /* Live theme channel — GSAP ScrollTrigger morphs --bg/--fg between worlds */

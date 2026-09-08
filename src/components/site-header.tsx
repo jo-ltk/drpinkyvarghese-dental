@@ -61,6 +61,7 @@ export function SiteHeader() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [navHidden, setNavHidden] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [pastHero, setPastHero] = useState(false);
   const lastScrollY = useRef(0);
   const menuRef = useRef<HTMLDivElement>(null);
   const burgerRef = useRef<HTMLButtonElement>(null);
@@ -69,9 +70,16 @@ export function SiteHeader() {
   const line3 = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
+    const openFromHero = () => setMenuOpen(true);
+    window.addEventListener("open-site-menu", openFromHero);
+    return () => window.removeEventListener("open-site-menu", openFromHero);
+  }, []);
+
+  useEffect(() => {
     const handleScroll = () => {
       const y = window.scrollY;
       setScrolled(y > 24);
+      setPastHero(y > window.innerHeight * 0.72);
 
       if (menuOpen) return;
 
@@ -180,8 +188,12 @@ export function SiteHeader() {
     <>
       <header
         className={cn(
-          "fixed inset-x-0 top-0 z-50 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]",
-          navHidden && !menuOpen ? "-translate-y-full" : "translate-y-0",
+          "fixed inset-x-0 top-0 z-50 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]",
+          !pastHero && !menuOpen
+            ? "pointer-events-none -translate-y-full opacity-0"
+            : navHidden && !menuOpen
+              ? "-translate-y-full"
+              : "translate-y-0",
         )}
       >
         <div className="mx-auto max-w-7xl px-4 pt-3 sm:px-6 lg:px-10">
@@ -240,7 +252,10 @@ export function SiteHeader() {
               <button
                 ref={burgerRef}
                 type="button"
-                className="relative flex size-11 cursor-pointer items-center justify-center rounded-full border border-[var(--color-gold)]/30 bg-[#1a0f2e]/35 text-current transition-transform active:scale-95 lg:hidden"
+                className={cn(
+                  "relative flex size-11 cursor-pointer items-center justify-center rounded-full border border-[var(--color-gold)]/30 bg-[#1a0f2e]/35 text-current transition-transform active:scale-95",
+                  menuOpen ? "" : "lg:hidden",
+                )}
                 aria-expanded={menuOpen}
                 aria-controls="mobile-menu"
                 aria-label={menuOpen ? "Close menu" : "Open menu"}
@@ -269,7 +284,7 @@ export function SiteHeader() {
       <div
         ref={menuRef}
         id="mobile-menu"
-        className="fixed inset-0 z-40 flex flex-col justify-between bg-[#1a0f2e] px-6 pt-24 pb-10 text-[#f7f3eb] opacity-0 lg:hidden"
+        className="fixed inset-0 z-40 flex flex-col justify-between bg-[#1a0f2e] px-6 pt-24 pb-10 text-[#f7f3eb] opacity-0"
         style={{ clipPath: "inset(0 0 100% 0)", pointerEvents: "none" }}
         aria-hidden={!menuOpen}
       >

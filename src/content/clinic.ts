@@ -67,11 +67,9 @@ export const HERO_ENVIRONMENT =
   "https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=2000&q=85";
 
 /** Editorial doctor / clinic portrait for the hero stage */
-export const HERO_FIGURES =
-  "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=1600&q=85";
+export const HERO_FIGURES = "/hero-portrait.png";
 
-export const HERO_FIGURES_MOBILE =
-  "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=1200&q=85";
+export const HERO_FIGURES_MOBILE = "/hero-portrait-mobile.png";
 
 /** Curated Treatment Index — Pinned horizontal scroll plates */
 export const TREATMENTS: TreatmentObject[] = [
